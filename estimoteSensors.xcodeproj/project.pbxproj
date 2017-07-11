@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0837EBCBC46408CC523423BB /* Pods_estimoteSensorsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */; };
 		CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055631EFDF17400F596DB /* AppDelegate.swift */; };
 		CE5055661EFDF17400F596DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055651EFDF17400F596DB /* ViewController.swift */; };
 		CE5055691EFDF17400F596DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5055671EFDF17400F596DB /* Main.storyboard */; };
@@ -15,6 +16,8 @@
 		CE5055711EFDF17400F596DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE50556F1EFDF17400F596DB /* LaunchScreen.storyboard */; };
 		CE50557C1EFDF17400F596DB /* estimoteSensorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE50557B1EFDF17400F596DB /* estimoteSensorsTests.swift */; };
 		CE5055871EFDF17400F596DB /* estimoteSensorsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055861EFDF17400F596DB /* estimoteSensorsUITests.swift */; };
+		F1EF73875AF92F9C46EC79F4 /* Pods_estimoteSensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214817F5785E1026EE459673 /* Pods_estimoteSensors.framework */; };
+		F89056C586018BE303FFF764 /* Pods_estimoteSensorsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F555B9B8488CB8D95AE14 /* Pods_estimoteSensorsUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07BA87567874460F6F1949C9 /* Pods-estimoteSensors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensors.debug.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensors/Pods-estimoteSensors.debug.xcconfig"; sourceTree = "<group>"; };
+		214817F5785E1026EE459673 /* Pods_estimoteSensors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_estimoteSensors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E8A5464F8375A3B14BAB7A7 /* Pods-estimoteSensorsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensorsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensorsUITests/Pods-estimoteSensorsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		572A49E9A6FFC16F32938524 /* Pods-estimoteSensorsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensorsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensorsTests/Pods-estimoteSensorsTests.release.xcconfig"; sourceTree = "<group>"; };
+		604E6F3275AD0809D5EB3BC7 /* Pods-estimoteSensors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensors.release.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensors/Pods-estimoteSensors.release.xcconfig"; sourceTree = "<group>"; };
+		610F555B9B8488CB8D95AE14 /* Pods_estimoteSensorsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_estimoteSensorsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64CC7D076CB51F2D3D71B1C3 /* Pods-estimoteSensorsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensorsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensorsUITests/Pods-estimoteSensorsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		71D28950B7EC4D740BB6C568 /* Pods-estimoteSensorsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensorsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensorsTests/Pods-estimoteSensorsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_estimoteSensorsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
 		CE5055601EFDF17400F596DB /* estimoteSensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = estimoteSensors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5055631EFDF17400F596DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5055651EFDF17400F596DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1EF73875AF92F9C46EC79F4 /* Pods_estimoteSensors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0837EBCBC46408CC523423BB /* Pods_estimoteSensorsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +85,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F89056C586018BE303FFF764 /* Pods_estimoteSensorsUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A885095B15CD39E67F700C83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				214817F5785E1026EE459673 /* Pods_estimoteSensors.framework */,
+				CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */,
+				610F555B9B8488CB8D95AE14 /* Pods_estimoteSensorsUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9CEA11D2CFD499BEE0E4006 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				07BA87567874460F6F1949C9 /* Pods-estimoteSensors.debug.xcconfig */,
+				604E6F3275AD0809D5EB3BC7 /* Pods-estimoteSensors.release.xcconfig */,
+				71D28950B7EC4D740BB6C568 /* Pods-estimoteSensorsTests.debug.xcconfig */,
+				572A49E9A6FFC16F32938524 /* Pods-estimoteSensorsTests.release.xcconfig */,
+				64CC7D076CB51F2D3D71B1C3 /* Pods-estimoteSensorsUITests.debug.xcconfig */,
+				4E8A5464F8375A3B14BAB7A7 /* Pods-estimoteSensorsUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CE5055571EFDF17400F596DB = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +122,8 @@
 				CE50557A1EFDF17400F596DB /* estimoteSensorsTests */,
 				CE5055851EFDF17400F596DB /* estimoteSensorsUITests */,
 				CE5055611EFDF17400F596DB /* Products */,
+				C9CEA11D2CFD499BEE0E4006 /* Pods */,
+				A885095B15CD39E67F700C83 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +147,7 @@
 				CE50556F1EFDF17400F596DB /* LaunchScreen.storyboard */,
 				CE5055721EFDF17400F596DB /* Info.plist */,
 				CE50556A1EFDF17400F596DB /* estimoteSensors.xcdatamodeld */,
+				CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */,
 			);
 			path = estimoteSensors;
 			sourceTree = "<group>";
@@ -135,9 +177,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE50558B1EFDF17400F596DB /* Build configuration list for PBXNativeTarget "estimoteSensors" */;
 			buildPhases = (
+				8F528D6D7B3EED75E818757C /* [CP] Check Pods Manifest.lock */,
 				CE50555C1EFDF17400F596DB /* Sources */,
 				CE50555D1EFDF17400F596DB /* Frameworks */,
 				CE50555E1EFDF17400F596DB /* Resources */,
+				FF64C14550B48474905B0717 /* [CP] Embed Pods Frameworks */,
+				CB0126EA526612C692E6D268 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +197,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE50558E1EFDF17400F596DB /* Build configuration list for PBXNativeTarget "estimoteSensorsTests" */;
 			buildPhases = (
+				B7751B1D202DDA75DFF30226 /* [CP] Check Pods Manifest.lock */,
 				CE5055731EFDF17400F596DB /* Sources */,
 				CE5055741EFDF17400F596DB /* Frameworks */,
 				CE5055751EFDF17400F596DB /* Resources */,
+				48161D303ABC9F617BBFD5D2 /* [CP] Embed Pods Frameworks */,
+				D5FC7C75D3DCC64887484E36 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +218,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE5055911EFDF17400F596DB /* Build configuration list for PBXNativeTarget "estimoteSensorsUITests" */;
 			buildPhases = (
+				3EEAA879FF5F71B996B90561 /* [CP] Check Pods Manifest.lock */,
 				CE50557E1EFDF17400F596DB /* Sources */,
 				CE50557F1EFDF17400F596DB /* Frameworks */,
 				CE5055801EFDF17400F596DB /* Resources */,
+				F02F6BFA147E72AB43441C0C /* [CP] Embed Pods Frameworks */,
+				FDBE2A0A36D4A078E5AE1558 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -198,6 +249,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = VFH547A942;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					CE5055761EFDF17400F596DB = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -259,6 +315,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3EEAA879FF5F71B996B90561 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		48161D303ABC9F617BBFD5D2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-estimoteSensorsTests/Pods-estimoteSensorsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F528D6D7B3EED75E818757C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B7751B1D202DDA75DFF30226 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CB0126EA526612C692E6D268 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-estimoteSensors/Pods-estimoteSensors-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5FC7C75D3DCC64887484E36 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-estimoteSensorsTests/Pods-estimoteSensorsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F02F6BFA147E72AB43441C0C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-estimoteSensorsUITests/Pods-estimoteSensorsUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDBE2A0A36D4A078E5AE1558 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-estimoteSensorsUITests/Pods-estimoteSensorsUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF64C14550B48474905B0717 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-estimoteSensors/Pods-estimoteSensors-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE50555C1EFDF17400F596DB /* Sources */ = {
@@ -419,32 +613,39 @@
 		};
 		CE50558C1EFDF17400F596DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07BA87567874460F6F1949C9 /* Pods-estimoteSensors.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VFH547A942;
 				INFOPLIST_FILE = estimoteSensors/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		CE50558D1EFDF17400F596DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 604E6F3275AD0809D5EB3BC7 /* Pods-estimoteSensors.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = VFH547A942;
 				INFOPLIST_FILE = estimoteSensors/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		CE50558F1EFDF17400F596DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71D28950B7EC4D740BB6C568 /* Pods-estimoteSensorsTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -460,6 +661,7 @@
 		};
 		CE5055901EFDF17400F596DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 572A49E9A6FFC16F32938524 /* Pods-estimoteSensorsTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -475,6 +677,7 @@
 		};
 		CE5055921EFDF17400F596DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64CC7D076CB51F2D3D71B1C3 /* Pods-estimoteSensorsUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VFH547A942;
@@ -489,6 +692,7 @@
 		};
 		CE5055931EFDF17400F596DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E8A5464F8375A3B14BAB7A7 /* Pods-estimoteSensorsUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VFH547A942;
@@ -520,6 +724,7 @@
 				CE50558D1EFDF17400F596DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE50558E1EFDF17400F596DB /* Build configuration list for PBXNativeTarget "estimoteSensorsTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +733,7 @@
 				CE5055901EFDF17400F596DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE5055911EFDF17400F596DB /* Build configuration list for PBXNativeTarget "estimoteSensorsUITests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +742,7 @@
 				CE5055931EFDF17400F596DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

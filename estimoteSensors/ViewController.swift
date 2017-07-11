@@ -34,7 +34,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate /* ESTTrigger
         
         super.init(coder: aDecoder)
         
-        self.nearableManager.delegate = self;
+        self.nearableManager.delegate = self
     }
     
     

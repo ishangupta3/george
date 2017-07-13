@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ViewController: UIViewController, ESTNearableManagerDelegate /* ESTTriggerManagerDelegate  */ {
     
@@ -39,6 +40,20 @@ class ViewController: UIViewController, ESTNearableManagerDelegate /* ESTTrigger
     
     
     
+    func initNotificationSetupCheck() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert])
+        { (success, error) in
+            if success {
+                print("Permission Granted")
+            } else {
+                print("There was a problem!")
+            }
+        }
+    }
+   
+    
+  
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +66,11 @@ class ViewController: UIViewController, ESTNearableManagerDelegate /* ESTTrigger
 //        let trigger = ESTTrigger(rules: [rule2], identifier: "goodboy")
 //        self.triggerManager.startMonitoring(for: trigger)
         
+        initNotificationSetupCheck()
         
         
-        
-       self.nearableManager.startMonitoring(forIdentifier: "733a6e0e829a8bed")
-        self.nearableManager.startMonitoring(forIdentifier: "2d54e81304d984af")
+       self.nearableManager.startMonitoring(forIdentifier: "0ab1d9bd539d61a0")
+       self.nearableManager.startMonitoring(forIdentifier: "2d54e81304d984af")
       //  self.nearableManager.startRanging(forIdentifier: "733a6e0e829a8bed")
       //   self.nearableManager.startRanging(forIdentifier: "2d54e81304d984af")
 
@@ -82,10 +97,21 @@ class ViewController: UIViewController, ESTNearableManagerDelegate /* ESTTrigger
     
         
     func nearableManager(_ manager: ESTNearableManager, didRangeNearable nearable: ESTNearable) {
+     
+        
         print("This nearable has been ranged: ", nearable.identifier, nearable.rssi)
         
         
+        nearableID.text = "This nearable has been ranged: "; nearable.identifier; nearable.rssi
+        
+        print(getDateTime())
+        
+      
+
+        print(nearableInformation[nearable.identifier]!["location"]!)
+        
         self.nearableManager.stopRanging(forIdentifier: nearable.identifier)
+       // self.nearableManager.startMonitoring(forIdentifier: nearable.identifier)
     }
     
     
@@ -94,30 +120,13 @@ class ViewController: UIViewController, ESTNearableManagerDelegate /* ESTTrigger
     func nearableManager(_ manager: ESTNearableManager, didEnterIdentifierRegion identifier: String)
     {
         
-//        if identifier == "733a6e0e829a8bed" {
-//        
-//           print(identifier)
-//          
-//        
-//          print("ENTERED REGION")
-//            
-//            
-//            let x: String = getDateTime()
-//            
-//            print(x)
-//            
-//            
-//             print("******************")
-//            
-//            
-//            
-//        }
+       
         
         
   
         
         print(identifier)
-        nearableID.text = identifier
+        nearableID.text = "You have entered the Region"
         
         self.nearableManager.startRanging(forIdentifier: identifier)
         
@@ -136,20 +145,35 @@ class ViewController: UIViewController, ESTNearableManagerDelegate /* ESTTrigger
         
         
         
-        print("EXITED REGION")
-        print(identifier)
-        print("EXITED REGION")
-        
-        print(getDateTime())
+        print("EXITED REGION", getDateTime(), nearable.identifier)
+      
         
         
+        nearableID.text = "You have left the region"
         
-        self.nearableManager.startMonitoring(forIdentifier: "733a6e0e829a8bed")
-        self.nearableManager.startMonitoring(forIdentifier: "2d54e81304d984af")
+        
+        
+     self.nearableManager.startMonitoring(forIdentifier: identifier)
+        
+        
+        
+        
+        
+       
+        let notification = UNMutableNotificationContent()
+        notification.title = "you have left the region"
+        notification.subtitle = "bye bye"
+        notification.body = "have fun"
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: "notification1", content: notification, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
 
         
     }
     
+ 
+
     
     
     

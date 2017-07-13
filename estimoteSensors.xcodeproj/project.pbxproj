@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0837EBCBC46408CC523423BB /* Pods_estimoteSensorsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */; };
+		CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB65D1F16C691000FF48B /* NearableInformation.swift */; };
 		CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055631EFDF17400F596DB /* AppDelegate.swift */; };
 		CE5055661EFDF17400F596DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055651EFDF17400F596DB /* ViewController.swift */; };
 		CE5055691EFDF17400F596DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5055671EFDF17400F596DB /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		71D28950B7EC4D740BB6C568 /* Pods-estimoteSensorsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensorsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensorsTests/Pods-estimoteSensorsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_estimoteSensorsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		CE4EB65D1F16C691000FF48B /* NearableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearableInformation.swift; sourceTree = "<group>"; };
 		CE5055601EFDF17400F596DB /* estimoteSensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = estimoteSensors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5055631EFDF17400F596DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5055651EFDF17400F596DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				CE5055721EFDF17400F596DB /* Info.plist */,
 				CE50556A1EFDF17400F596DB /* estimoteSensors.xcdatamodeld */,
 				CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */,
+				CE4EB65D1F16C691000FF48B /* NearableInformation.swift */,
 			);
 			path = estimoteSensors;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */,
 				CE5055661EFDF17400F596DB /* ViewController.swift in Sources */,
 				CE50556C1EFDF17400F596DB /* estimoteSensors.xcdatamodeld in Sources */,
 				CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */,

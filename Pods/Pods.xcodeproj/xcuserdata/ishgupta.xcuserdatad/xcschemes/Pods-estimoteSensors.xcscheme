@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "99761804D9F3C5B28F2B4C47470118F8"
+               BlueprintIdentifier = "218D14FFBF464C82A6CA70E93D53B14F"
                BuildableName = "Pods_estimoteSensors.framework"
                BlueprintName = "Pods-estimoteSensors"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "99761804D9F3C5B28F2B4C47470118F8"
+            BlueprintIdentifier = "218D14FFBF464C82A6CA70E93D53B14F"
             BuildableName = "Pods_estimoteSensors.framework"
             BlueprintName = "Pods-estimoteSensors"
             ReferencedContainer = "container:Pods.xcodeproj">

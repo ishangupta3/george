@@ -15,7 +15,7 @@ import Foundation
     
         "0ab1d9bd539d61a0" : [
         
-            "location" : "palletes - salad",
+            "location" : "palleteSalad",
             "major" : "1230",
             "minor"  : "100",
         
@@ -23,7 +23,7 @@ import Foundation
     
         "2d54e81304d984af" : [
         
-            "location" : "Templates - Asia",
+            "location" : "TemplatesAsia",
             "major" : "2222",
             "minor"  : "100",
         

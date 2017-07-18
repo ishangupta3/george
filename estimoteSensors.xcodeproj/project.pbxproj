@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0837EBCBC46408CC523423BB /* Pods_estimoteSensorsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */; };
+		CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */; };
+		CE2A3F691F182F1600D89651 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */; };
 		CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB65D1F16C691000FF48B /* NearableInformation.swift */; };
 		CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055631EFDF17400F596DB /* AppDelegate.swift */; };
 		CE5055661EFDF17400F596DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055651EFDF17400F596DB /* ViewController.swift */; };
@@ -48,7 +50,9 @@
 		64CC7D076CB51F2D3D71B1C3 /* Pods-estimoteSensorsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensorsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensorsUITests/Pods-estimoteSensorsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		71D28950B7EC4D740BB6C568 /* Pods-estimoteSensorsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-estimoteSensorsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-estimoteSensorsTests/Pods-estimoteSensorsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_estimoteSensorsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerEstimote.swift; sourceTree = "<group>"; };
 		CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE4EB65D1F16C691000FF48B /* NearableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearableInformation.swift; sourceTree = "<group>"; };
 		CE5055601EFDF17400F596DB /* estimoteSensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = estimoteSensors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5055631EFDF17400F596DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,11 +148,13 @@
 			children = (
 				CE5055631EFDF17400F596DB /* AppDelegate.swift */,
 				CE5055651EFDF17400F596DB /* ViewController.swift */,
+				CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */,
 				CE5055671EFDF17400F596DB /* Main.storyboard */,
 				CE50556D1EFDF17400F596DB /* Assets.xcassets */,
 				CE50556F1EFDF17400F596DB /* LaunchScreen.storyboard */,
 				CE5055721EFDF17400F596DB /* Info.plist */,
 				CE50556A1EFDF17400F596DB /* estimoteSensors.xcdatamodeld */,
+				CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */,
 				CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */,
 				CE4EB65D1F16C691000FF48B /* NearableInformation.swift */,
 			);
@@ -300,6 +306,7 @@
 				CE5055711EFDF17400F596DB /* LaunchScreen.storyboard in Resources */,
 				CE50556E1EFDF17400F596DB /* Assets.xcassets in Resources */,
 				CE5055691EFDF17400F596DB /* Main.storyboard in Resources */,
+				CE2A3F691F182F1600D89651 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +473,7 @@
 				CE5055661EFDF17400F596DB /* ViewController.swift in Sources */,
 				CE50556C1EFDF17400F596DB /* estimoteSensors.xcdatamodeld in Sources */,
 				CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */,
+				CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

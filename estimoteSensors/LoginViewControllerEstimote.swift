@@ -40,14 +40,14 @@ class LoginViewControllerEstimote: UIViewController {
     
     
         }
-    
+
     
         override func viewWillDisappear(_ animated: Bool) {
             Auth.auth().removeStateDidChangeListener(handle!)
             
         }
-     
-     
+    
+    
      
 
     

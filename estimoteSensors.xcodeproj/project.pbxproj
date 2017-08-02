@@ -19,6 +19,9 @@
 		CE5055711EFDF17400F596DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE50556F1EFDF17400F596DB /* LaunchScreen.storyboard */; };
 		CE50557C1EFDF17400F596DB /* estimoteSensorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE50557B1EFDF17400F596DB /* estimoteSensorsTests.swift */; };
 		CE5055871EFDF17400F596DB /* estimoteSensorsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055861EFDF17400F596DB /* estimoteSensorsUITests.swift */; };
+		CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2D71F27AFDB0076423D /* RangeViewController.swift */; };
+		CE65B2DA1F2814840076423D /* nearableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2D91F2814840076423D /* nearableData.swift */; };
+		CE65B2DC1F2A6C0E0076423D /* DebugTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */; };
 		F1EF73875AF92F9C46EC79F4 /* Pods_estimoteSensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214817F5785E1026EE459673 /* Pods_estimoteSensors.framework */; };
 		F89056C586018BE303FFF764 /* Pods_estimoteSensorsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F555B9B8488CB8D95AE14 /* Pods_estimoteSensorsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +71,9 @@
 		CE5055821EFDF17400F596DB /* estimoteSensorsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = estimoteSensorsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5055861EFDF17400F596DB /* estimoteSensorsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = estimoteSensorsUITests.swift; sourceTree = "<group>"; };
 		CE5055881EFDF17400F596DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE65B2D71F27AFDB0076423D /* RangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeViewController.swift; sourceTree = "<group>"; };
+		CE65B2D91F2814840076423D /* nearableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nearableData.swift; sourceTree = "<group>"; };
+		CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +154,8 @@
 			children = (
 				CE5055631EFDF17400F596DB /* AppDelegate.swift */,
 				CE5055651EFDF17400F596DB /* ViewController.swift */,
+				CE65B2D71F27AFDB0076423D /* RangeViewController.swift */,
+				CE65B2D91F2814840076423D /* nearableData.swift */,
 				CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */,
 				CE5055671EFDF17400F596DB /* Main.storyboard */,
 				CE50556D1EFDF17400F596DB /* Assets.xcassets */,
@@ -157,6 +165,7 @@
 				CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */,
 				CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */,
 				CE4EB65D1F16C691000FF48B /* NearableInformation.swift */,
+				CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */,
 			);
 			path = estimoteSensors;
 			sourceTree = "<group>";
@@ -471,7 +480,10 @@
 			files = (
 				CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */,
 				CE5055661EFDF17400F596DB /* ViewController.swift in Sources */,
+				CE65B2DA1F2814840076423D /* nearableData.swift in Sources */,
+				CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */,
 				CE50556C1EFDF17400F596DB /* estimoteSensors.xcdatamodeld in Sources */,
+				CE65B2DC1F2A6C0E0076423D /* DebugTableViewCell.swift in Sources */,
 				CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */,
 				CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */,
 			);
@@ -601,6 +613,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -632,7 +645,7 @@
 				INFOPLIST_FILE = estimoteSensors/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensors;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishangupta3.estimoteSensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_VERSION = 3.0;
@@ -648,7 +661,7 @@
 				INFOPLIST_FILE = estimoteSensors/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensors;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishangupta3.estimoteSensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
 				SWIFT_VERSION = 3.0;

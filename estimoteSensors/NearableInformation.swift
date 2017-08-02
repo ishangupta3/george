@@ -12,10 +12,12 @@ import Foundation
 
 
     let nearableInformation = [
+        
+        /*
     
         "0ab1d9bd539d61a0" : [
         
-            "location" : "palleteSalad",
+            "location" : "TemplatesEntrance",
             "major" : "1230",
             "minor"  : "100",
         
@@ -23,27 +25,118 @@ import Foundation
     
         "2d54e81304d984af" : [
         
-            "location" : "TemplatesAsia",
+            "location" : "TemplatesDishwasher",
             "major" : "2222",
             "minor"  : "100",
         
         ],
     
     
-        "beacon3" : [
+        "21e91bbf6cf59076" : [
         
-            "uuid" : "B6EDC187-A212-4FAD-B2F9-19B0C65DBA97",
+            "location" : "TemplatesAsia",
             "major" : "3333",
             "minor"  : "100",
         
         ],
     
-        "beacon4" : [
+        "9713290c1e7c1016" : [
         
-            "uuid" : "20194041-94B1-4899-A339-3C1CA6C37C4E",
+            "location" : "TemplatesIndia",
             "major" : "4444",
             "minor"  : "100",
         
+        ],
+        
+        "86032bc0d660db2b" : [
+            
+            "location" : "TemplatesCheckout",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+        
+        "a18c67f6cbf70ee6" : [
+            
+            "location" : "TemplatesBurger",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+        
+        "9d1fcf092f7f7c5e" : [
+            
+            "location" : "PalletesEntranceExit",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+        
+        "726477ebba894da0" : [
+            
+            "location" : "PalletesSalad",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+        
+        "7e87ff288c396700" : [
+            
+            "location" : "PalletesDishwasher",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+ 
+ 
+        */
+        
+        "2e59eb1b7809cd54" : [
+            
+            "location" : "IshansOffice",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+        
+        /*
+        
+        "bf3a127b7d4fdcd3" : [
+            
+            "location" : "PalletesSalad",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+ 
+ 
+    */
+        
+        "6788c858ccfcd163" : [
+            
+            "location" : "Kitchen",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+        
+        "f348b513c73f8900" : [
+            
+            "location" : "Elevator",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
+        
+        "b5a3395f8bb86c97" : [
+            
+            "location" : "GeorgiosOffice",
+            "major" : "4444",
+            "minor"  : "100",
+            
         ]
+
+
+
     
     ]

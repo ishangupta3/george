@@ -29,6 +29,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     
     var periManager: CBPeripheralManager!
     var ref: DatabaseReference!
+    var ref2: DatabaseReference!
     
     @IBOutlet weak var nearableLocation: UILabel!
     
@@ -43,10 +44,41 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
      var  debugSignalStrengthArray: [Int] = []
     var debugRangedSensorTitle: [String] = []
     
+    @IBOutlet weak var nearableLocation3: UILabel!
     
     
     
-    var sensorInfo: [String: Int] = [:]
+    var sensorInfo: [String: Int] = ["PalletesSushi": 0,
+                                    "Elevator": 0,
+                                    "PalletesDishwasher" : 0,
+                                    "PalletesEntranceExit" : 0,
+                                    "TemplatesAsia" : 0,
+                                    "TemplatesIndia" : 0,
+                                    "TemplatesBurger" : 0,
+                                    "TemplatesHomeStyle" : 0,
+                                    "TemplatesEntrance" : 0,
+                                    "TemplatesDishwasher" : 0,
+                                    "PalletesGreekMexican" : 0,
+                                    "PalletesPizza" : 0,
+                                    "PalletesSalad" : 0
+                                     ]
+    
+    
+    var meanSensorSignal: [String : [Int]]  = [:]
+    
+    
+    var timeIncrementers: Int = 0
+    
+    
+    
+  
+    var averageSignalStrength: Array = [0]
+    
+    
+    
+    
+    
+    
     
     //****************************************************** **************************** ******* DEBUGGING CODE
     
@@ -72,6 +104,13 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     }
     
     
+    var debugModeCheck: Bool = false
+    @IBAction func debugMode(_ sender: Any) {
+        
+        
+        
+        debugModeCheck = true
+    }
     
     func initNotificationSetupCheck() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert])
@@ -155,34 +194,37 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
      
         
-     //  self.nearableManager.startMonitoring(forIdentifier: "0ab1d9bd539d61a0")  // TemplatesEntrance
-     //  self.nearableManager.startMonitoring(forIdentifier: "2d54e81304d984af")  // TemplatesDishwasher
-     //  self.nearableManager.startMonitoring(forIdentifier: "21e91bbf6cf59076")  //Templates Asia
-     //   self.nearableManager.startMonitoring(forIdentifier: "9713290c1e7c1016")  // TemplatesIndia
-     //  self.nearableManager.startMonitoring(forIdentifier: "86032bc0d660db2b")   //TemplatesCheckout
-    //    self.nearableManager.startMonitoring(forIdentifier: "a18c67f6cbf70ee6")   // TemplatesBurger
-     //    self.nearableManager.startMonitoring(forIdentifier: "9d1fcf092f7f7c5e")   // PalletesEntrance
-     //    self.nearableManager.startMonitoring(forIdentifier: "726477ebba894da0")   // PalletesSalad
-     //   self.nearableManager.startMonitoring(forIdentifier: "7e87ff288c396700")   // PalletesDishwasher
-       //  self.nearableManager.startMonitoring(forIdentifier: "2e59eb1b7809cd54")   // PalletesSushi / ishans office
+       self.nearableManager.startMonitoring(forIdentifier: "0ab1d9bd539d61a0")  // TemplatesEntrance    // installed
+       self.nearableManager.startMonitoring(forIdentifier: "2d54e81304d984af")  // TemplatesDishwasher  // installed
+       self.nearableManager.startMonitoring(forIdentifier: "21e91bbf6cf59076")  //Templates Asia        // installed
+        self.nearableManager.startMonitoring(forIdentifier: "9713290c1e7c1016")  // TemplatesIndia      // installed
+       self.nearableManager.startMonitoring(forIdentifier: "86032bc0d660db2b")   //Templateshomestyle   // installed
+        self.nearableManager.startMonitoring(forIdentifier: "a18c67f6cbf70ee6")   // TemplatesBurger    // installed
+         self.nearableManager.startMonitoring(forIdentifier: "9d1fcf092f7f7c5e")   // PalletesEntrance
+         self.nearableManager.startMonitoring(forIdentifier: "726477ebba894da0")   // PalletesSalad
+        self.nearableManager.startMonitoring(forIdentifier: "7e87ff288c396700")   // PalletesDishwasher
+         self.nearableManager.startMonitoring(forIdentifier: "2e59eb1b7809cd54")   // PalletesSushi
+        
+        self.nearableManager.startMonitoring(forIdentifier: "b5a3395f8bb86c97")    // Palletes Pizza
+        
+         self.nearableManager.startMonitoring(forIdentifier: "f348b513c73f8900")   // Palletes Greek Mexican
         
         
-     //   self.nearableManager.startMonitoring(forIdentifier: "bf3a127b7d4fdcd3")   // PalletesSalad
+       // self.nearableManager.startMonitoring(forIdentifier: "bf3a127b7d4fdcd3")   // Layers
        
-     //   self.nearableManager.startMonitoring(forIdentifier: "6788c858ccfcd163")   // LayersEntranceExit / kitchen
+      //  self.nearableManager.startMonitoring(forIdentifier: "6788c858ccfcd163")   // LayersEntranceExit / kitchen
         
-      //  self.nearableManager.startMonitoring(forIdentifier: "f348b513c73f8900")   // LayersCashier/elevator
      
-        //  self.nearableManager.startMonitoring(forIdentifier: "b5a3395f8bb86c97")   // Extra1 / Georgios office
+     
+  
         
  
         
         
-          self.nearableManager.startRanging(forIdentifier: "2e59eb1b7809cd54") // ishans office
-        self.nearableManager.startRanging(forIdentifier: "6788c858ccfcd163")    // kitchen
-        self.nearableManager.startRanging(forIdentifier: "f348b513c73f8900")   //   Elevator
-        self.nearableManager.startRanging(forIdentifier: "b5a3395f8bb86c97")    // Georgios Office
-        
+
+//        self.nearableManager.startRanging(forIdentifier: "6788c858ccfcd163")    // kitchen
+
+
         
         //  *****************************************************   - Debugging Code- VIEW DID LOAD
         
@@ -217,9 +259,9 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
        // print("This nearable has been ranged: ", nearable.identifier, nearable.rssi)
          var message = String(describing: ("This nearable has been ranged: ", nearable.identifier, nearable.rssi))
-       // print(message, "TESTING")
+       
         
-      
+     
        
 
         //****************************************************************************** -> Debugging Code
@@ -238,6 +280,42 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
          debugRangedSensorTitle.removeAll()
         
         
+        
+        
+        averageSignalStrength.append(nearable.rssi)
+        let signalCounts = averageSignalStrength.count
+        
+        if signalCounts == 5 {
+            
+            var total: Int = 0
+          
+            
+            for element in averageSignalStrength {
+                
+              
+                
+                total = total + (element * -1)
+                
+                
+            }
+            
+           print(total / signalCounts)
+            averageSignalStrength.removeAll()
+            
+            
+        }
+        
+        
+      
+        
+        /*
+ 
+            Logic  : IF the signal Strength is under "70" then increment the counter for that SPECIFC sensor title "Value" in the DICT
+         
+                have a boolean function which checks if the value of the dict passes a certain number thus saying true or false
+ 
+        
+        
         if debugRangedSensorTitle.contains(nearableName!) {
             
             print("alreadycontains element")
@@ -250,25 +328,169 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
             sensorInfo.updateValue(nearable.rssi, forKey: nearableName!)
             
         }
+ 
+ 
+            */
+        
+        // INCREASE SIGNAL CONSTRAINT with the proption of using time as the main key to obtaining data point
+        // ask georgios about setting up 
+   
+        
+    if nearable.rssi < -75  || nearable.rssi == 127 {
+            
+
+            
+            sensorInfo.updateValue(0, forKey: nearableName!)
+        
+            
+        } else if nearable.rssi >=  -75 {  // NEED TO GET RID OF THE 75
+            
+            
+           // sensorInfo.updateValue(timeIncrementers, forKey: nearableName!)  // updating the vlaue in the dict everytime the signal is below "70"
+            
+            for (location, timeIncrementer)  in sensorInfo {
+                
+                if location == nearableName! {
+                    
+                    
+                    var x = timeIncrementer
+                    x += 1
+                    sensorInfo.updateValue(x, forKey: nearableName!)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    if   sendDataCheck(timeCounter: timeIncrementer) == true    {
+                        
+                        
+                        // DO THE AVERAGE HER OF THE INCREMENTED DATA THEN CREATE ANOTHER IF
+                        
+                    
+                        
+                        let dateData: NSDictionary
+                        dateData = ["userID" : user!.uid,
+                                    "RSSI": nearable.rssi,
+                                    "timestamp": ServerValue.timestamp(),
+                                    "location" : nearableInformation[nearable.identifier]!["location"]!]
+                        
+                        let time = getDateTime()
+                        
+                        //***************************
+                        let ref = Database.database().reference().childByAutoId()
+                         ref.setValue(dateData)
+ 
+                        
+                          sensorInfo.updateValue(0, forKey: nearableName!)
+                        
+                        // let ref = Database.database().reference().child(user!.uid) // .child("Enter")
+                       
+                        
+                       
+                      
+                        
+                        
+                        
+                       
+                        
+                        
+                        
+                      //  ref.child(keys).setValue(dateData)
+                        
+                        
+                        //***************************
+                        
+                        
+                        /*
+                        
+                        let ref = Database.database().reference().child(user!.uid) //  .child(timeDict) // .child("Enter")
+                       
+                        
+                         
+                         
+                        dateData = ["RSSI": nearable.rssi,
+                                    "timestamp": ServerValue.timestamp(),
+                                    "location" : nearableInformation[nearable.identifier]!["location"]!]
+                      
+                        
+                       
+                        let key = ref.childByAutoId().key
+                         let keys =  String(describing: Int(round(Date().timeIntervalSince1970)))
+                        ref.child(keys).setValue(dateData)
+ 
+ 
+                        */
+                    
+                        
+            
+
+                        
+                        
+                      
+                      //  created nested dictionaries
+                      // corner case of signal strength being 127
+                        
+                    }
+
+                    
+                    
+                }
+                
+                
+            }
+            
+            
+        }
+        
+        else {
+        
+        
+           print()
+        
+        }
+        
+        
+        
+        
+    //   print(sensorInfo)
         
 
         
         
-        for  (location, signalStrength) in sensorInfo {
+        for  (location, timeIncrementer) in sensorInfo {
             
             
-            debugSignalStrengthArray.append(signalStrength)
+            debugSignalStrengthArray.append(timeIncrementer)
             debugRangedSensorTitle.append(location)
             
-            print(location,signalStrength)
-            print("******")
-            print(debugRangedSensorTitle,debugSignalStrengthArray)
+            
+           
+            
+       //     print(location,timeIncrementer, "RANGING VALUE")
+        //    print("******")
+            
+//
             
         }
         
         
        
+       
+     
         
+        
+        
+        if debugModeCheck == true {
+            
+             self.view.backgroundColor = UIColor.red
+            nearableLocation.text =  nearableInformation[nearable.identifier]!["location"]!
+            nearableLocation.backgroundColor = UIColor.black
+            nearableSignal.backgroundColor = UIColor.black
+            nearableSignal.text = String(nearable.rssi)
+            
+        }
         
         
         
@@ -278,22 +500,11 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
        
         
-        print(getDateTime())
-        print(user!.uid)
+     
+       // print(user!.uid)
         
-        let dateData: NSDictionary
-        
-        let ref = Database.database().reference().child(user!.uid).child("Enter")
-        dateData = ["RSSI": nearable.rssi,
-                    "timestamp": ServerValue.timestamp(),
-                    "location" : nearableInformation[nearable.identifier]!["location"]!]
-        
-        let key = ref.childByAutoId().key
-        ref.child(key).setValue(dateData)
-        
-         nearableLocation.text =  nearableInformation[nearable.identifier]!["location"]!
-         nearableSignal.text = String(nearable.rssi)
-        
+       
+ 
         
         
         
@@ -351,10 +562,75 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
          self.view.backgroundColor = UIColor.white
         nearableID.textColor = UIColor.black
         
-        print(identifier)
-        nearableID.text = "Ranging"
+       
+        
+        print("*******************************************************************************")
+        
+         print("**************************MONITORED**********************")
+        
+        print(nearableInformation[identifier]!["location"]!, "MONITORED VALUE")
+
+         print("*************************MONITORED**************************")
+        
         
         self.nearableManager.startRanging(forIdentifier: identifier)
+        
+        
+        /*
+        
+        
+        let nearableName = String(nearableInformation[identifier]!["location"]!)
+        
+        if nearableName == "TemplatesDishwasher" || nearableName ==  "TemplatesEntrance" || nearableName == "PalletesEntranceExit" || nearableName == "PalletesDishwasher" {
+            
+            let dateData: NSDictionary
+            dateData = ["userID" : user!.uid,
+                        "RSSI": -75,
+                        "timestamp": ServerValue.timestamp(),                                   // CHECK WHY app is DYING
+                        "location" : nearableInformation[identifier]!["location"]!]
+            
+            
+            let ref = Database.database().reference().childByAutoId()
+            ref.setValue(dateData)
+
+            // send local noticiation
+        
+            
+        }
+        
+        
+        
+        if nearableLocation.text == "" {
+        
+         nearableLocation.text = nearableInformation[identifier]!["location"]!
+            nearableLocation.backgroundColor = UIColor.blue
+            nearableSignal.backgroundColor = UIColor.white
+            nearableLocation3.backgroundColor = UIColor.white
+            
+            
+        } else if nearableSignal.text == "" {
+            
+            nearableSignal.text = nearableInformation[identifier]!["location"]
+             nearableSignal.backgroundColor = UIColor.red
+            nearableLocation.backgroundColor = UIColor.white
+            nearableLocation3.backgroundColor = UIColor.white
+        } else {
+            
+            
+            nearableLocation3.text = nearableInformation[identifier]!["location"]
+            nearableLocation3.backgroundColor = UIColor.green
+            nearableSignal.backgroundColor = UIColor.white
+            nearableLocation.backgroundColor = UIColor.white
+        }
+        
+    
+ 
+ 
+ 
+        */
+        
+        
+        // END of did ENTER REGION
         
     }
     
@@ -371,13 +647,14 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
         
         
-        print(identifier)
+        // print(identifier)
       
         
         
       //  nearableID.text = "You have left the region"
         
-       
+        /*
+         
         let refExit = Database.database().reference().child((user?.uid)!).child("Exit")
         let dateExitData: NSDictionary = [ "timestamp": ServerValue.timestamp(),
                              "location" : nearableInformation[identifier]!["location"]!]
@@ -389,8 +666,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     
         
         
-        /*
-        
+      
         
        
         let notification = UNMutableNotificationContent()
@@ -466,6 +742,6 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
 //        }
 //    }
 
-   
+
 }
 

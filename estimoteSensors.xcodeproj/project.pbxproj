@@ -22,6 +22,7 @@
 		CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2D71F27AFDB0076423D /* RangeViewController.swift */; };
 		CE65B2DA1F2814840076423D /* nearableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2D91F2814840076423D /* nearableData.swift */; };
 		CE65B2DC1F2A6C0E0076423D /* DebugTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */; };
+		CEEA0E441F33189000D9954B /* ModelFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA0E431F33189000D9954B /* ModelFunctions.swift */; };
 		F1EF73875AF92F9C46EC79F4 /* Pods_estimoteSensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214817F5785E1026EE459673 /* Pods_estimoteSensors.framework */; };
 		F89056C586018BE303FFF764 /* Pods_estimoteSensorsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F555B9B8488CB8D95AE14 /* Pods_estimoteSensorsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		CE65B2D71F27AFDB0076423D /* RangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeViewController.swift; sourceTree = "<group>"; };
 		CE65B2D91F2814840076423D /* nearableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nearableData.swift; sourceTree = "<group>"; };
 		CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTableViewCell.swift; sourceTree = "<group>"; };
+		CEEA0E431F33189000D9954B /* ModelFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			children = (
 				CE5055631EFDF17400F596DB /* AppDelegate.swift */,
 				CE5055651EFDF17400F596DB /* ViewController.swift */,
+				CEEA0E431F33189000D9954B /* ModelFunctions.swift */,
 				CE65B2D71F27AFDB0076423D /* RangeViewController.swift */,
 				CE65B2D91F2814840076423D /* nearableData.swift */,
 				CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */,
@@ -483,6 +486,7 @@
 				CE65B2DA1F2814840076423D /* nearableData.swift in Sources */,
 				CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */,
 				CE50556C1EFDF17400F596DB /* estimoteSensors.xcdatamodeld in Sources */,
+				CEEA0E441F33189000D9954B /* ModelFunctions.swift in Sources */,
 				CE65B2DC1F2A6C0E0076423D /* DebugTableViewCell.swift in Sources */,
 				CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */,
 				CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */,
@@ -641,6 +645,7 @@
 			baseConfigurationReference = 07BA87567874460F6F1949C9 /* Pods-estimoteSensors.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = VFH547A942;
 				INFOPLIST_FILE = estimoteSensors/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -657,6 +662,7 @@
 			baseConfigurationReference = 604E6F3275AD0809D5EB3BC7 /* Pods-estimoteSensors.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = VFH547A942;
 				INFOPLIST_FILE = estimoteSensors/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

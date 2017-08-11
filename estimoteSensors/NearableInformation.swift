@@ -13,7 +13,7 @@ import Foundation
 
     let nearableInformation = [
         
-        /*
+        
     
         "0ab1d9bd539d61a0" : [
         
@@ -50,7 +50,7 @@ import Foundation
         
         "86032bc0d660db2b" : [
             
-            "location" : "TemplatesCheckout",
+            "location" : "TemplatesHomeStyle",
             "major" : "4444",
             "minor"  : "100",
             
@@ -64,13 +64,7 @@ import Foundation
             
         ],
         
-        "9d1fcf092f7f7c5e" : [
-            
-            "location" : "PalletesEntranceExit",
-            "major" : "4444",
-            "minor"  : "100",
-            
-        ],
+        
         
         "726477ebba894da0" : [
             
@@ -79,6 +73,7 @@ import Foundation
             "minor"  : "100",
             
         ],
+ 
         
         "7e87ff288c396700" : [
             
@@ -87,30 +82,36 @@ import Foundation
             "minor"  : "100",
             
         ],
+        
+        "9d1fcf092f7f7c5e" : [
+            
+            "location" : "PalletesEntranceExit",
+            "major" : "4444",
+            "minor"  : "100",
+            
+        ],
  
  
-        */
+ 
         
         "2e59eb1b7809cd54" : [
             
-            "location" : "IshansOffice",
+            "location" : "PalletesSushi",
             "major" : "4444",
             "minor"  : "100",
             
         ],
         
-        /*
+       
         
         "bf3a127b7d4fdcd3" : [
             
-            "location" : "PalletesSalad",
+            "location" : "Layers",
             "major" : "4444",
             "minor"  : "100",
             
         ],
  
- 
-    */
         
         "6788c858ccfcd163" : [
             
@@ -122,7 +123,7 @@ import Foundation
         
         "f348b513c73f8900" : [
             
-            "location" : "Elevator",
+            "location" : "PalletesGreekMexican",
             "major" : "4444",
             "minor"  : "100",
             
@@ -130,7 +131,7 @@ import Foundation
         
         "b5a3395f8bb86c97" : [
             
-            "location" : "GeorgiosOffice",
+            "location" : "PalletesPizza",
             "major" : "4444",
             "minor"  : "100",
             

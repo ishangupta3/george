@@ -49,7 +49,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     
     
     var sensorInfo: [String: Int] = ["PalletesSushi": 0,
-                                    "Elevator": 0,
+                                    "Layers": 0,
                                     "PalletesDishwasher" : 0,
                                     "PalletesEntranceExit" : 0,
                                     "TemplatesAsia" : 0,
@@ -62,6 +62,22 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
                                     "PalletesPizza" : 0,
                                     "PalletesSalad" : 0
                                      ]
+    
+    
+    var sensorInfoAverage: [String: Int] = ["PalletesSushi": 0,
+                                     "Layers": 0,
+                                     "PalletesDishwasher" : 0,
+                                     "PalletesEntranceExit" : 0,
+                                     "TemplatesAsia" : 0,
+                                     "TemplatesIndia" : 0,
+                                     "TemplatesBurger" : 0,
+                                     "TemplatesHomeStyle" : 0,
+                                     "TemplatesEntrance" : 0,
+                                     "TemplatesDishwasher" : 0,
+                                     "PalletesGreekMexican" : 0,
+                                     "PalletesPizza" : 0,
+                                     "PalletesSalad" : 0
+    ]
     
     
     var meanSensorSignal: [String : [Int]]  = [:]
@@ -210,7 +226,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
          self.nearableManager.startMonitoring(forIdentifier: "f348b513c73f8900")   // Palletes Greek Mexican
         
         
-       // self.nearableManager.startMonitoring(forIdentifier: "bf3a127b7d4fdcd3")   // Layers
+        self.nearableManager.startMonitoring(forIdentifier: "bf3a127b7d4fdcd3")   // Layers
        
       //  self.nearableManager.startMonitoring(forIdentifier: "6788c858ccfcd163")   // LayersEntranceExit / kitchen
         
@@ -279,74 +295,10 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
          debugSignalStrengthArray.removeAll()
          debugRangedSensorTitle.removeAll()
         
+ //   ****
         
-        
-        
-        averageSignalStrength.append(nearable.rssi)
-        let signalCounts = averageSignalStrength.count
-        
-        if signalCounts == 5 {
+        if  nearable.rssi != 127 {
             
-            var total: Int = 0
-          
-            
-            for element in averageSignalStrength {
-                
-              
-                
-                total = total + (element * -1)
-                
-                
-            }
-            
-           print(total / signalCounts)
-            averageSignalStrength.removeAll()
-            
-            
-        }
-        
-        
-      
-        
-        /*
- 
-            Logic  : IF the signal Strength is under "70" then increment the counter for that SPECIFC sensor title "Value" in the DICT
-         
-                have a boolean function which checks if the value of the dict passes a certain number thus saying true or false
- 
-        
-        
-        if debugRangedSensorTitle.contains(nearableName!) {
-            
-            print("alreadycontains element")
-            sensorInfo.updateValue(nearable.rssi, forKey: nearableName!)
-            
-            
-        } else {
-            
-            // debugRangedSensorTitle.append(nearableName!)
-            sensorInfo.updateValue(nearable.rssi, forKey: nearableName!)
-            
-        }
- 
- 
-            */
-        
-        // INCREASE SIGNAL CONSTRAINT with the proption of using time as the main key to obtaining data point
-        // ask georgios about setting up 
-   
-        
-    if nearable.rssi < -75  || nearable.rssi == 127 {
-            
-
-            
-            sensorInfo.updateValue(0, forKey: nearableName!)
-        
-            
-        } else if nearable.rssi >=  -75 {  // NEED TO GET RID OF THE 75
-            
-            
-           // sensorInfo.updateValue(timeIncrementers, forKey: nearableName!)  // updating the vlaue in the dict everytime the signal is below "70"
             
             for (location, timeIncrementer)  in sensorInfo {
                 
@@ -358,83 +310,49 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
                     sensorInfo.updateValue(x, forKey: nearableName!)
                     
                     
+                for (locationAverage, sensorStrengthAverage) in sensorInfoAverage {
                     
+                  if locationAverage == nearableName! { // checking for signal average dict
                     
-                    
-                    
+                     var y = sensorStrengthAverage
+                        y += nearable.rssi
+                        sensorInfoAverage.updateValue(y, forKey: nearableName!)   // updating the average of the sums of the nearable signals
                     
                     if   sendDataCheck(timeCounter: timeIncrementer) == true    {
                         
+                           sensorInfo.updateValue(0, forKey: nearableName!)
+                        
+                        if sendAverageCheck(averageCounter: sensorStrengthAverage) == true  {                                     // do if else and the else will update the average value to 0...
+                            sensorInfoAverage.updateValue(0, forKey: nearableName!) // refresh the value to 0
                         
                         // DO THE AVERAGE HER OF THE INCREMENTED DATA THEN CREATE ANOTHER IF
                         
                     
-                        
+                    
                         let dateData: NSDictionary
                         dateData = ["userID" : user!.uid,
                                     "RSSI": nearable.rssi,
                                     "timestamp": ServerValue.timestamp(),
                                     "location" : nearableInformation[nearable.identifier]!["location"]!]
                         
-                        let time = getDateTime()
+                   
                         
-                        //***************************
+                       
                         let ref = Database.database().reference().childByAutoId()
                          ref.setValue(dateData)
  
                         
-                          sensorInfo.updateValue(0, forKey: nearableName!)
                         
-                        // let ref = Database.database().reference().child(user!.uid) // .child("Enter")
-                       
+                          
+                            
+                        }   else {  // inner if loop checking the average to be under 75
+                                sensorInfoAverage.updateValue(0, forKey: nearableName!)
+                            }
+                        } // checking the counter value to be 5 readings
                         
-                       
-                      
-                        
-                        
-                        
-                       
-                        
-                        
-                        
-                      //  ref.child(keys).setValue(dateData)
-                        
-                        
-                        //***************************
-                        
-                        
-                        /*
-                        
-                        let ref = Database.database().reference().child(user!.uid) //  .child(timeDict) // .child("Enter")
-                       
-                        
-                         
-                         
-                        dateData = ["RSSI": nearable.rssi,
-                                    "timestamp": ServerValue.timestamp(),
-                                    "location" : nearableInformation[nearable.identifier]!["location"]!]
-                      
-                        
-                       
-                        let key = ref.childByAutoId().key
-                         let keys =  String(describing: Int(round(Date().timeIntervalSince1970)))
-                        ref.child(keys).setValue(dateData)
- 
- 
-                        */
-                    
-                        
-            
+                      }
 
-                        
-                        
-                      
-                      //  created nested dictionaries
-                      // corner case of signal strength being 127
-                        
-                    }
-
-                    
+                    }  // inner for loop for average
                     
                 }
                 
@@ -444,15 +362,10 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
             
         }
         
-        else {
+       
         
         
-           print()
-        
-        }
-        
-        
-        
+        //***
         
     //   print(sensorInfo)
         
@@ -464,14 +377,8 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
             
             debugSignalStrengthArray.append(timeIncrementer)
             debugRangedSensorTitle.append(location)
-            
-            
-           
-            
-       //     print(location,timeIncrementer, "RANGING VALUE")
-        //    print("******")
-            
-//
+
+
             
         }
         
@@ -514,39 +421,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
    
         
-      /*
- 
- 
-       let ref = Database.database().reference().child((user?.uid)!).child("dateEntered")
-      //  ref = Database.database().reference().child("users").child(email!)
-          let dateData = ["date": getDateTime()]
-        let key = ref.childByAutoId().key
-        ref.child(key).setValue(dateData)
-        
-        
-        let refRSSI = Database.database().reference().child((user?.uid)!).child("dateEntered").child("RSSI")
-        //  ref = Database.database().reference().child("users").child(email!)
-        let rssiData = ["RSSI": nearable.rssi]
-        let keyRSSI = ref.childByAutoId().key
-        refRSSI.child(keyRSSI).setValue(rssiData)
-        
-        
-        
-        
-        let  refLocation = Database.database().reference().child((user?.uid)!).child("location")
-        let locationData = ["location": nearableInformation[nearable.identifier]!["location"]!]
-        let locationKey = refLocation.childByAutoId().key
-        refLocation.child(locationKey).setValue(locationData)
-
-        print(nearableInformation[nearable.identifier]!["location"]!)
-        
-        self.nearableManager.stopRanging(forIdentifier: nearable.identifier)
-       // self.nearableManager.stopMonitoring(forIdentifier: nearable.identifier)
-       // self.nearableManager.startMonitoring(forIdentifier: nearable.identifier)
- 
- 
- 
- */
+    
     }
     
     

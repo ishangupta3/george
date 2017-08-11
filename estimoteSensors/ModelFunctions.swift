@@ -26,6 +26,25 @@ func  sendDataCheck(timeCounter: Int) -> Bool {
 
 
 
+func sendAverageCheck(averageCounter: Int) -> Bool {
+    
+    
+    let average = averageCounter / 5
+    
+    if average >=  -75 {
+        
+        return true
+        
+    }
+    
+    return false
+    
+    
+    
+}
+
+
+
 
 func incrementOneFunction(timeIncrementParameter: Int) -> Int {
     

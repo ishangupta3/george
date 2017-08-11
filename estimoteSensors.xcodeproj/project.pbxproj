@@ -23,6 +23,7 @@
 		CE65B2DA1F2814840076423D /* nearableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2D91F2814840076423D /* nearableData.swift */; };
 		CE65B2DC1F2A6C0E0076423D /* DebugTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */; };
 		CEEA0E441F33189000D9954B /* ModelFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA0E431F33189000D9954B /* ModelFunctions.swift */; };
+		CEFEAA851F3D8A4E00A2795F /* comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEAA841F3D8A4E00A2795F /* comments.swift */; };
 		F1EF73875AF92F9C46EC79F4 /* Pods_estimoteSensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214817F5785E1026EE459673 /* Pods_estimoteSensors.framework */; };
 		F89056C586018BE303FFF764 /* Pods_estimoteSensorsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F555B9B8488CB8D95AE14 /* Pods_estimoteSensorsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 		CE65B2D91F2814840076423D /* nearableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nearableData.swift; sourceTree = "<group>"; };
 		CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTableViewCell.swift; sourceTree = "<group>"; };
 		CEEA0E431F33189000D9954B /* ModelFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFunctions.swift; sourceTree = "<group>"; };
+		CEFEAA841F3D8A4E00A2795F /* comments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */,
 				CE4EB65D1F16C691000FF48B /* NearableInformation.swift */,
 				CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */,
+				CEFEAA841F3D8A4E00A2795F /* comments.swift */,
 			);
 			path = estimoteSensors;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */,
+				CEFEAA851F3D8A4E00A2795F /* comments.swift in Sources */,
 				CE5055661EFDF17400F596DB /* ViewController.swift in Sources */,
 				CE65B2DA1F2814840076423D /* nearableData.swift in Sources */,
 				CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */,

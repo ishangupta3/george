@@ -216,7 +216,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         self.nearableManager.startMonitoring(forIdentifier: "9713290c1e7c1016")  // TemplatesIndia      // installed
        self.nearableManager.startMonitoring(forIdentifier: "86032bc0d660db2b")   //Templateshomestyle   // installed
         self.nearableManager.startMonitoring(forIdentifier: "a18c67f6cbf70ee6")   // TemplatesBurger    // installed
-         self.nearableManager.startMonitoring(forIdentifier: "9d1fcf092f7f7c5e")   // PalletesEntrance
+       self.nearableManager.startMonitoring(forIdentifier: "9d1fcf092f7f7c5e")   // PalletesEntrance
          self.nearableManager.startMonitoring(forIdentifier: "726477ebba894da0")   // PalletesSalad
         self.nearableManager.startMonitoring(forIdentifier: "7e87ff288c396700")   // PalletesDishwasher
          self.nearableManager.startMonitoring(forIdentifier: "2e59eb1b7809cd54")   // PalletesSushi
@@ -278,9 +278,34 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
        
         
      
-       
+        let nearableNameTEST = String(nearableInformation[nearable.identifier]!["location"]!)
+        
+        
+        if nearable.rssi != 127 {
+    
+        let everything: NSDictionary
+        everything = [
+           
+            
+            "userID" : user!.uid,
+            "RSSI": (nearable.rssi),
+            "timestamp": Int(Date().timeIntervalSince1970),
+            "location" : nearableInformation[nearable.identifier]!["location"]!
+        
+        ]
 
-        //****************************************************************************** -> Debugging Code
+        
+        let ref = Database.database().reference().child("Everything").childByAutoId()
+        ref.setValue(everything)
+            
+            
+            
+        }
+        
+        
+
+        
+        
          let nearableSignalString = String(nearable.rssi)
         let nearableName = String(nearableInformation[nearable.identifier]!["location"]!)
        
@@ -297,24 +322,24 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
  //   ****
         
-        if  nearable.rssi != 127 {
+     if  nearable.rssi != 127 {
             
             
-            for (location, timeIncrementer)  in sensorInfo {
+        for (location, timeIncrementer)  in sensorInfo {
                 
-                if location == nearableName! {
+            if location == nearableName! {
                     
                     
-                    var x = timeIncrementer
+                var x = timeIncrementer
                     x += 1
                     sensorInfo.updateValue(x, forKey: nearableName!)
                     
                     
-                for (locationAverage, sensorStrengthAverage) in sensorInfoAverage {
+                  for (locationAverage, sensorStrengthAverage) in sensorInfoAverage {
                     
-                  if locationAverage == nearableName! { // checking for signal average dict
+                    if locationAverage == nearableName! { // checking for signal average dict
                     
-                     var y = sensorStrengthAverage
+                        var y = sensorStrengthAverage
                         y += nearable.rssi
                         sensorInfoAverage.updateValue(y, forKey: nearableName!)   // updating the average of the sums of the nearable signals
                     
@@ -323,31 +348,35 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
                            sensorInfo.updateValue(0, forKey: nearableName!)
                         
                         if sendAverageCheck(averageCounter: sensorStrengthAverage) == true  {                                     // do if else and the else will update the average value to 0...
-                            sensorInfoAverage.updateValue(0, forKey: nearableName!) // refresh the value to 0
+                           
                         
                         // DO THE AVERAGE HER OF THE INCREMENTED DATA THEN CREATE ANOTHER IF
                         
                     
                     
-                        let dateData: NSDictionary
-                        dateData = ["userID" : user!.uid,
-                                    "RSSI": nearable.rssi,
-                                    "timestamp": ServerValue.timestamp(),
-                                    "location" : nearableInformation[nearable.identifier]!["location"]!]
+                                let dateData: NSDictionary
+                                dateData = ["userID" : user!.uid,
+                                "RSSI": nearable.rssi, // check if it works with x cross check it with physical number
+                                "timestamp": ServerValue.timestamp(),
+                                "location" : nearableInformation[nearable.identifier]!["location"]!]
                         
                    
                         
                        
-                        let ref = Database.database().reference().childByAutoId()
-                         ref.setValue(dateData)
- 
-                        
+                              //  let ref = Database.database().reference().childByAutoId()
+                                let ref = Database.database().reference().child("strictFiltered").childByAutoId()
+                             //   ref.setValue(dateData)
+                            
+                       // self.nearableManager.startMonitoring(forIdentifier: nearable.identifier)
+                            
+                            sensorInfoAverage.updateValue(0, forKey: nearableName!) // refresh the value to 0 for sensor
                         
                           
                             
-                        }   else {  // inner if loop checking the average to be under 75
+                          }   else {  // inner if loop checking the average to be under 75
+                            
                                 sensorInfoAverage.updateValue(0, forKey: nearableName!)
-                            }
+                              }
                         } // checking the counter value to be 5 readings
                         
                       }
@@ -377,7 +406,9 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
             
             debugSignalStrengthArray.append(timeIncrementer)
             debugRangedSensorTitle.append(location)
-
+            
+            
+          
 
             
         }
@@ -418,11 +449,18 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     //   self.nearableManager.stopRanging(forIdentifier: nearable.identifier)       // uncomment    after testing
     //   self.nearableManager.startMonitoring(forIdentifier: nearable.identifier)    // uncomment     after testing
         
+      //  self.nearableManager.startRanging(forIdentifier: nearable.identifier)
+        
         
    
         
     
     }
+    
+    
+   
+    
+    
     
     
   
@@ -449,30 +487,31 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
         
         self.nearableManager.startRanging(forIdentifier: identifier)
+      //  self.nearableManager.startMonitoring(forIdentifier: identifier) // check if this has anything to do with more efficient reporting
         
         
-        /*
+      
         
         
         let nearableName = String(nearableInformation[identifier]!["location"]!)
         
-        if nearableName == "TemplatesDishwasher" || nearableName ==  "TemplatesEntrance" || nearableName == "PalletesEntranceExit" || nearableName == "PalletesDishwasher" {
-            
+         
             let dateData: NSDictionary
-            dateData = ["userID" : user!.uid,
-                        "RSSI": -75,
-                        "timestamp": ServerValue.timestamp(),                                   // CHECK WHY app is DYING
+            dateData = [
+                        "timestamp": ServerValue.timestamp(),
+                         "userID" : user!.uid,
                         "location" : nearableInformation[identifier]!["location"]!]
             
             
-            let ref = Database.database().reference().childByAutoId()
-            ref.setValue(dateData)
+            let ref = Database.database().reference().child("RegionEntered").childByAutoId()
+          //  ref.setValue(dateData)
 
             // send local noticiation
         
-            
-        }
-        
+     
+  
+          /*
+ 
         
         
         if nearableLocation.text == "" {
@@ -502,10 +541,14 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
  
  
  
-        */
+ 
         
         
         // END of did ENTER REGION
+ 
+ 
+ 
+   */
         
     }
     
@@ -556,7 +599,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
  */
         
         self.nearableManager.startRanging(forIdentifier: identifier)
-        
+        self.nearableManager.startMonitoring(forIdentifier: identifier)
 
         
     }
@@ -578,7 +621,20 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
             nearableID.text = "Bluetooth Turned Off"
             
             
-        
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Don't forget to turn ON bluetooth"
+            content.body = "Thank you"
+            content.sound = UNNotificationSound.default()
+            
+            
+            let date = Date(timeIntervalSinceNow: 60)
+            let date1 = Date(timeIntervalSince1970:  1502710200)
+           // let date 2 = Date.
+            let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second], from: date1)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+            let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             
         }
     }

@@ -13,7 +13,7 @@ import Foundation
 
 func  sendDataCheck(timeCounter: Int) -> Bool {
     
-    if timeCounter == 5   {
+    if timeCounter == 3   {
         
      return true
         
@@ -29,9 +29,9 @@ func  sendDataCheck(timeCounter: Int) -> Bool {
 func sendAverageCheck(averageCounter: Int) -> Bool {
     
     
-    let average = averageCounter / 5
+    let average = averageCounter / 3
     
-    if average >=  -75 {
+    if average >=  -78 {
         
         return true
         

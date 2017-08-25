@@ -23,7 +23,7 @@ class LoginViewControllerEstimote: UIViewController {
     }
 
     
-    
+
     
     
         override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +41,8 @@ class LoginViewControllerEstimote: UIViewController {
     
         }
 
-    
+ 
+
         override func viewWillDisappear(_ animated: Bool) {
             Auth.auth().removeStateDidChangeListener(handle!)
             

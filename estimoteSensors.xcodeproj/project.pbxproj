@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0837EBCBC46408CC523423BB /* Pods_estimoteSensorsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */; };
 		CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */; };
+		CE2046DD1F67B7F400F84E0C /* cafe-data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2046DC1F67B7F400F84E0C /* cafe-data.swift */; };
 		CE2A3F691F182F1600D89651 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */; };
 		CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB65D1F16C691000FF48B /* NearableInformation.swift */; };
 		CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055631EFDF17400F596DB /* AppDelegate.swift */; };
@@ -57,6 +58,7 @@
 		CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_estimoteSensorsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerEstimote.swift; sourceTree = "<group>"; };
 		CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		CE2046DC1F67B7F400F84E0C /* cafe-data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "cafe-data.swift"; sourceTree = "<group>"; };
 		CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE4EB65D1F16C691000FF48B /* NearableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearableInformation.swift; sourceTree = "<group>"; };
 		CE5055601EFDF17400F596DB /* estimoteSensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = estimoteSensors.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 				CE4EB65D1F16C691000FF48B /* NearableInformation.swift */,
 				CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */,
 				CEFEAA841F3D8A4E00A2795F /* comments.swift */,
+				CE2046DC1F67B7F400F84E0C /* cafe-data.swift */,
 			);
 			path = estimoteSensors;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 			files = (
 				CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */,
 				CEFEAA851F3D8A4E00A2795F /* comments.swift in Sources */,
+				CE2046DD1F67B7F400F84E0C /* cafe-data.swift in Sources */,
 				CE5055661EFDF17400F596DB /* ViewController.swift in Sources */,
 				CE65B2DA1F2814840076423D /* nearableData.swift in Sources */,
 				CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */,

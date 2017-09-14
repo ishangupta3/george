@@ -18,6 +18,8 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     
     @IBOutlet weak var tableView: UITableView!
     
+     var timer = Timer()
+    
     
    //   let triggerManager = ESTTriggerManager()
     
@@ -60,11 +62,12 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
                                     "TemplatesDishwasher" : 0,
                                     "PalletesGreekMexican" : 0,
                                     "PalletesPizza" : 0,
-                                    "PalletesSalad" : 0
+                                    "PalletesSalad" : 0,
+                                    "TestingRoom" : 0
                                      ]
     
     
-    var sensorInfoAverage: [String: Int] = ["PalletesSushi": 0,
+    var sensorInfoMissing: [String: Int] = ["PalletesSushi": 0,
                                      "Layers": 0,
                                      "PalletesDishwasher" : 0,
                                      "PalletesEntranceExit" : 0,
@@ -76,8 +79,28 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
                                      "TemplatesDishwasher" : 0,
                                      "PalletesGreekMexican" : 0,
                                      "PalletesPizza" : 0,
-                                     "PalletesSalad" : 0
+                                     "PalletesSalad" : 0,
+                                     "TestingRoom" : 0
     ]
+    
+    
+    
+    var sensorInfoTime: [String: Int] = ["PalletesSushi": 0,
+                                            "Layers": 0,
+                                            "PalletesDishwasher" : 0,
+                                            "PalletesEntranceExit" : 0,
+                                            "TemplatesAsia" : 0,
+                                            "TemplatesIndia" : 0,
+                                            "TemplatesBurger" : 0,
+                                            "TemplatesHomeStyle" : 0,
+                                            "TemplatesEntrance" : 0,
+                                            "TemplatesDishwasher" : 0,
+                                            "PalletesGreekMexican" : 0,
+                                            "PalletesPizza" : 0,
+                                            "PalletesSalad" : 0,
+                                            "TestingRoom" : 0
+    ]
+
     
     
     var meanSensorSignal: [String : [Int]]  = [:]
@@ -190,6 +213,9 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     override func viewDidLoad() {
         super.viewDidLoad()
         
+     
+ 
+        runTimer()
 //      
 //        self.triggerManager.delegate = self
 //        let rule1 = ESTOrientationRule.orientationEquals(.horizontalUpsideDown, for: .dog)
@@ -199,7 +225,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
 //        self.triggerManager.startMonitoring(for: trigger)
         
         initNotificationSetupCheck()
-        Database.database().isPersistenceEnabled = true
+       Database.database().isPersistenceEnabled = false
           periManager = CBPeripheralManager.init(delegate: self, queue: nil)
         
         
@@ -227,6 +253,9 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
         
         self.nearableManager.startMonitoring(forIdentifier: "bf3a127b7d4fdcd3")   // Layers
+        
+        
+        //  self.nearableManager.startMonitoring(forIdentifier: "23e1f0c6b8996e1d")  // TestingRoom
        
       //  self.nearableManager.startMonitoring(forIdentifier: "6788c858ccfcd163")   // LayersEntranceExit / kitchen
         
@@ -260,17 +289,33 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
             }
     
     
-//    func getNearableInformation(identifier: String!) -> ESTNearable {
-//        
-//        let nearableInfo = nearable[identifier] as ESTNearable
-//        
-//        return nearableInfo
-//
-//    }
     
-  
+    func runTimer() {
+       
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
     
+    
+    func updateTimer() {
+        
+        nearableLocation.backgroundColor = UIColor.green
+        nearableSignal.backgroundColor = UIColor.green
+        
+        
+        
+    }
+
     func nearableManager(_ manager: ESTNearableManager, didRangeNearable nearable: ESTNearable) {
+        
+      
+        print(nearable.rssi)
+       
+        
+        let nearableSignalString = String(nearable.rssi)
+        let nearableName = String(nearableInformation[nearable.identifier]!["location"]!)
+        
+        
+     
      
         
        // print("This nearable has been ranged: ", nearable.identifier, nearable.rssi)
@@ -281,7 +326,9 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         let nearableNameTEST = String(nearableInformation[nearable.identifier]!["location"]!)
         
         
-        if nearable.rssi != 127 {
+        // SEND to DB (Everything)
+        
+        if nearable.rssi != 127 && nearableName! != "testingRoom" {
     
         let everything: NSDictionary
         everything = [
@@ -291,25 +338,27 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
             "RSSI": (nearable.rssi),
             "timestamp": Int(Date().timeIntervalSince1970),
             "location" : nearableInformation[nearable.identifier]!["location"]!
+            
+            
+            
         
         ]
 
         
         let ref = Database.database().reference().child("Everything").childByAutoId()
-        ref.setValue(everything)
+     //  ref.setValue(everything)
             
+            
+           
             
             
         }
         
-        
+        // SEND to DB (Everything)
 
         
         
-         let nearableSignalString = String(nearable.rssi)
-        let nearableName = String(nearableInformation[nearable.identifier]!["location"]!)
-       
-       
+      
         
         
 
@@ -320,7 +369,170 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
          debugSignalStrengthArray.removeAll()
          debugRangedSensorTitle.removeAll()
         
+        
+   
+        
+        
+        if nearable.rssi != 127 {
+            
+            for (location, lastSeenSensorTime) in sensorInfoTime {
+                
+                if location == nearableName! {
+                    
+                    if lastSeenSensorTime == 0 ||  Int(Date().timeIntervalSince1970) - lastSeenSensorTime <= 5 {
+                        
+                        sensorInfo.updateValue(0, forKey: nearableName!)
+                        
+                        // send to DB because it is the first time app has come across the sensor
+                        
+                        let cleaned: NSDictionary
+                        cleaned = [
+                            
+                            
+                            "userID" : user!.uid,
+                            "RSSI": (nearable.rssi),
+                            "timestamp": Int(Date().timeIntervalSince1970),
+                            "location" : nearableInformation[nearable.identifier]!["location"]!
+                            
+                        ]
+                        
+                      //  print(nearable.rssi)
+                        let ref = Database.database().reference().child("Everything").childByAutoId()
+                        ref.setValue(cleaned)
+                        
+                    } else {
+                       
+                       //  print(Int(Date().timeIntervalSince1970) - lastSeenSensorTime, "More then 5 Seconds", nearable.rssi)
+                   
+                        
+                        // send second value onwards to the database ----- >
+                        
+                        // everything under this is essentially useless -- > might want to remove 
+                        
+                        for (location, timeIncrementer) in sensorInfo {
+                            
+                          //  print(Int(Date().timeIntervalSince1970) - lastSeenSensorTime)
+                            
+                            if location == nearableName! {
+                                
+                                var x = timeIncrementer
+                                x += 1
+                                sensorInfo.updateValue(x, forKey: nearableName!)
+                               // print("getting rid of this signal Strength", nearable.rssi)
+                                if x >= 3  { // does using "x" work
+                                    
+                                    // SEND to DB || this is removing the first bad entry in a new list of signal strengths
+                                    
+                                    
+                                }
+                                
+                                
+                            }
+                        }
+                        
+                    
+                        
+                    }
+                    
+                 //   print(Int(Date().timeIntervalSince1970) - lastSeenSensorTime)
+                    
+                }
+            
+            }
+        
+            
+        }
+        
+        sensorInfoTime.updateValue(Int(Date().timeIntervalSince1970), forKey: nearableName!) // getting the last time signal of the last sensor
+        
+     
+        
+ 
+        
+        
+       /*
+        
+        
+        if nearable.rssi != 127 {
+            
+            
+            for (location, timeIncrementer) in sensorInfo {
+                
+                if location == nearableName! {
+                    
+                    sensorInfoMissing.updateValue(0, forKey: nearableName!) // nearable not missing anymore (found)
+                    
+                    
+        
+                    
+                    var x = timeIncrementer
+                        x += 1
+                        sensorInfo.updateValue(x, forKey: nearableName!)
+                    
+                        if x >= 2  { // does using "x" work
+                        
+                            // SEND to DB || this is removing the first bad entry in a new list of signal strengths
+                            
+                            let cleaned: NSDictionary
+                            cleaned = [
+                                
+                                
+                                "userID" : user!.uid,
+                                "RSSI": (nearable.rssi),
+                                "timestamp": Int(Date().timeIntervalSince1970),
+                                "location" : nearableInformation[nearable.identifier]!["location"]!
+                                
+                            ]
+                            
+                            
+                            let ref = Database.database().reference().child("Cleaned").childByAutoId()
+                           ref.setValue(cleaned)
+                            
+                        
+                    }
+                    
+                    
+                }
+                
+            
+            
+                
+                for (location, timeIncrementerMissing) in sensorInfoMissing {
+                    
+                    if location != nearableName! {
+                        
+                        var y = timeIncrementerMissing
+                        y += 1
+                        sensorInfoMissing.updateValue(y, forKey: nearableName!)
+                        
+                        if y >= 5 {
+                            
+                            sensorInfo.updateValue(0, forKey: nearableName!)
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+   */
+        
+        
+        
  //   ****
+        
+        
+        /*      Average Loop Algo
         
      if  nearable.rssi != 127 {
             
@@ -373,7 +585,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
                         
                           
                             
-                          }   else {  // inner if loop checking the average to be under 75
+                        }   else {  // inner if loop checking the average to be under 75
                             
                                 sensorInfoAverage.updateValue(0, forKey: nearableName!)
                               }
@@ -392,6 +604,8 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         }
         
        
+ 
+            */
         
         
         //***
@@ -447,28 +661,29 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
         
     //   self.nearableManager.stopRanging(forIdentifier: nearable.identifier)       // uncomment    after testing
-    //   self.nearableManager.startMonitoring(forIdentifier: nearable.identifier)    // uncomment     after testing
-        
-      //  self.nearableManager.startRanging(forIdentifier: nearable.identifier)
         
         
-   
+       self.nearableManager.startMonitoring(forIdentifier: nearable.identifier)    // uncomment     after testing
+        
+        
+        self.nearableManager.startRanging(forIdentifier: nearable.identifier)
+        
         
     
+   
     }
     
     
-   
-    
-    
-    
+ 
     
   
     
     func nearableManager(_ manager: ESTNearableManager, didEnterIdentifierRegion identifier: String)
     {
         
-       
+        nearableLocation.backgroundColor = UIColor.blue
+        nearableSignal.backgroundColor = UIColor.blue
+        print("You have entered the REGION******* HELLO")
         
         
         
@@ -477,13 +692,13 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
         
        
         
-        print("*******************************************************************************")
-        
+       // print("*******************************************************************************")
+         print("You have entered the REGION******* HELLO")
          print("**************************MONITORED**********************")
         
-        print(nearableInformation[identifier]!["location"]!, "MONITORED VALUE")
+      //  print(nearableInformation[identifier]!["location"]!, "MONITORED VALUE")
 
-         print("*************************MONITORED**************************")
+     //    print("*************************MONITORED**************************")
         
         
         self.nearableManager.startRanging(forIdentifier: identifier)
@@ -563,7 +778,7 @@ class ViewController: UIViewController, ESTNearableManagerDelegate, CBPeripheral
     
     func nearableManager(_ manager: ESTNearableManager, didExitIdentifierRegion identifier: String) {
         
-        
+        print("you left the region ******** BYE BYE ")
         
         // print(identifier)
       

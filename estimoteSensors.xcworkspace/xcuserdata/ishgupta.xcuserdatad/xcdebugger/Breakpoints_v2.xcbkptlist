@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "estimoteSensors/ViewController.swift"
-            timestampString = "525214110.08187"
+            timestampString = "526600627.541396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "654"
-            endingLineNumber = "654"
+            startingLineNumber = "869"
+            endingLineNumber = "869"
             landmarkName = "getReadableTimestamp(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "estimoteSensors/ViewController.swift"
-            timestampString = "525214110.08187"
+            timestampString = "526600627.541396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "653"
-            endingLineNumber = "653"
+            startingLineNumber = "868"
+            endingLineNumber = "868"
             landmarkName = "getReadableTimestamp(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "estimoteSensors/ViewController.swift"
-            timestampString = "525214110.08187"
+            timestampString = "526600627.541396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "592"
-            endingLineNumber = "592"
+            startingLineNumber = "807"
+            endingLineNumber = "807"
             landmarkName = "nearableManager(_:didExitIdentifierRegion:)"
             landmarkType = "7">
          </BreakpointContent>

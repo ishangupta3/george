@@ -11,6 +11,7 @@
 
 
 #import <EstimoteSDK/EstimoteSDK.h>
+ #import "EILIndoorSDK.h"
 
 
 #endif /* ObjCBridge_h */

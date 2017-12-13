@@ -12,6 +12,7 @@ target 'estimoteSensors' do
 	pod 'Firebase/Database'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
+	pod ‘EstimoteIndoorSDK’
 
   target 'estimoteSensorsTests' do
     inherit! :search_paths

@@ -7,7 +7,9 @@
 //
 
 import XCTest
+
 @testable import estimoteSensors
+@testable import Firebase
 
 class estimoteSensorsTests: XCTestCase {
     

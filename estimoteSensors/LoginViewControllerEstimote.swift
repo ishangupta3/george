@@ -30,7 +30,9 @@ class LoginViewControllerEstimote: UIViewController {
     
             handle = Auth.auth().addStateDidChangeListener { (auth, user) in
     
-                if Auth.auth().currentUser != nil {
+               if Auth.auth().currentUser != nil {
+                
+   
     
                     self.performSegue(withIdentifier:"goToHome", sender: self )
     
@@ -56,6 +58,45 @@ class LoginViewControllerEstimote: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    @IBAction func loginButton(_ sender: Any) {
+        
+    if emailTextField.text != "" && passwordTextField.text != "" {
+        
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
+            
+            if user != nil {
+                
+              
+                
+                
+                self.performSegue(withIdentifier:"goToHome", sender: self )
+            } else {
+                
+                
+                let alert = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+                print((message: (error?.localizedDescription)!))
+                
+            }
+            
+            }
+            
+    } else {
+        
+        let alert = UIAlertController(title: "Alert", message: "Please input Email or password", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+       
+        
+        }
+        
+        
+        
+        
     }
     
     @IBAction func createAccountButton(_ sender: Any) {

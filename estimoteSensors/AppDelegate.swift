@@ -10,14 +10,24 @@ import UIKit
 import CoreData
 import Firebase
 
+import UserNotifications
+
+
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, EILBackgroundIndoorLocationManagerDelegate {
 
     var window: UIWindow?
     
+    let backgroundIndoorManager = EILBackgroundIndoorLocationManager()
     
+    let asia = EILPoint(x: 6.37, y: 12.96)
+    let india = EILPoint(x: 6.16, y: 0.62)
+    let  burger = EILPoint(x: 0.59, y: 0.59)
+    let homeStyle = EILPoint(x: 0.59, y: 13.47)
+    
+ 
     
    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -25,18 +35,112 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         FirebaseApp.configure()
-    
+        
+        // Estimote Beacon Code
+        
+        
+        ESTConfig.setupAppID("caf-7az", andAppToken: "23c0e2454af572312419045a789a6340")
+        self.backgroundIndoorManager.delegate = self
+        self.backgroundIndoorManager.requestAlwaysAuthorization()
+        
+        
+        
+        let fetchLocation = EILRequestFetchLocation(locationIdentifier: "template")
+        fetchLocation.sendRequest { (location, error) in
+            if let location = location {
+                self.backgroundIndoorManager.startPositionUpdates(for: location)
+            } else {
+                print("can't fetch location: \(error)")
+            }
+        }
+      
+        
+        
+        // Estimote Beacon Code
+        
+        
         return true
     }
+    
+    
+   
+    
+    func backgroundIndoorLocationManager(_ manager: EILBackgroundIndoorLocationManager, didUpdatePosition position: EILOrientedPoint, with positionAccuracy: EILPositionAccuracy, in location: EILLocation) {
+       
+        
+         print(location.description())
+         print(position.description())
+        
+        
+        
+        var accuracy: String!
+        switch positionAccuracy {
+        case .veryHigh: accuracy = "+/- 1.00m"
+        case .high:     accuracy = "+/- 1.62m"
+        case .medium:   accuracy = "+/- 2.62m"
+        case .low:      accuracy = "+/- 4.24m"
+        case .veryLow:  accuracy = "+/- ? :-("
+        case .unknown:  accuracy = "unknown"
+        }
+        print(String(format: "x: %5.2f, y: %5.2f, orientation: %3.0f, accuracy: %@",
+                     position.x, position.y, position.orientation, accuracy))
+        
+        print("B A C K G R O U N D   W O R K S")
+        
+        
+        if position.distance(to: asia) < 2 {
+            print("near asia")
+            let i = FirebaseStruct(user: (Auth.auth().currentUser?.uid)!, timestamp: Int(Date().timeIntervalSince1970), xCoordinate: position.x, yCoordinate: position.y, location: "asia")
+        }
+        
+        if position.distance(to: homeStyle) < 0.5 {
+            print("near homestyle")
+            let y = FirebaseStruct(user: (Auth.auth().currentUser?.uid)!, timestamp: Int(Date().timeIntervalSince1970), xCoordinate: position.x, yCoordinate: position.y, location: "homestyle")
+        }
+        
+        if position.distance(to: india) < 2 {
+            print("near  india")
+            let z = FirebaseStruct(user: (Auth.auth().currentUser?.uid)!, timestamp: Int(Date().timeIntervalSince1970), xCoordinate: position.x, yCoordinate: position.y, location: "india")
+        }
+        
+        if position.distance(to: burger) < 2 {
+            print("near burger")
+            let a = FirebaseStruct(user: (Auth.auth().currentUser?.uid)!, timestamp: Int(Date().timeIntervalSince1970), xCoordinate: position.x, yCoordinate: position.y, location: "burger")
+        }
+        
+        
+     
+        
+        
+    }
+    
+    func backgroundIndoorLocationManager(
+        _ locationManager: EILBackgroundIndoorLocationManager,
+        didFailToUpdatePositionWithError error: Error) {
+        
+        
+        print("BACKGROUND DOES NOT WORK: \(error.localizedDescription)")
+        
+        
+        
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
+       
+        
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        
+       
+     
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

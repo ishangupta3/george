@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0837EBCBC46408CC523423BB /* Pods_estimoteSensorsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */; };
 		CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */; };
+		CE1EC46F1F9186EA0008656B /* FireBaseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1EC46E1F9186EA0008656B /* FireBaseStruct.swift */; };
 		CE2046DD1F67B7F400F84E0C /* cafe-data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2046DC1F67B7F400F84E0C /* cafe-data.swift */; };
 		CE2A3F691F182F1600D89651 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */; };
 		CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB65D1F16C691000FF48B /* NearableInformation.swift */; };
@@ -20,10 +21,13 @@
 		CE5055711EFDF17400F596DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE50556F1EFDF17400F596DB /* LaunchScreen.storyboard */; };
 		CE50557C1EFDF17400F596DB /* estimoteSensorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE50557B1EFDF17400F596DB /* estimoteSensorsTests.swift */; };
 		CE5055871EFDF17400F596DB /* estimoteSensorsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055861EFDF17400F596DB /* estimoteSensorsUITests.swift */; };
+		CE531FE21F9FD690003ECE63 /* NotifStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE531FE11F9FD690003ECE63 /* NotifStruct.swift */; };
 		CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2D71F27AFDB0076423D /* RangeViewController.swift */; };
 		CE65B2DA1F2814840076423D /* nearableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2D91F2814840076423D /* nearableData.swift */; };
 		CE65B2DC1F2A6C0E0076423D /* DebugTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */; };
+		CE93901F1F6C499E0067A0C1 /* DatabaseParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93901E1F6C499E0067A0C1 /* DatabaseParent.swift */; };
 		CEEA0E441F33189000D9954B /* ModelFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA0E431F33189000D9954B /* ModelFunctions.swift */; };
+		CEF0CB281FDB411D00AA40FD /* PasswordReset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0CB271FDB411D00AA40FD /* PasswordReset.swift */; };
 		CEFEAA851F3D8A4E00A2795F /* comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFEAA841F3D8A4E00A2795F /* comments.swift */; };
 		F1EF73875AF92F9C46EC79F4 /* Pods_estimoteSensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214817F5785E1026EE459673 /* Pods_estimoteSensors.framework */; };
 		F89056C586018BE303FFF764 /* Pods_estimoteSensorsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 610F555B9B8488CB8D95AE14 /* Pods_estimoteSensorsUITests.framework */; };
@@ -58,6 +62,7 @@
 		CCA9693B9C150481BD06C2E4 /* Pods_estimoteSensorsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_estimoteSensorsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerEstimote.swift; sourceTree = "<group>"; };
 		CE0BDBC71F01852E00D4FFFD /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		CE1EC46E1F9186EA0008656B /* FireBaseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseStruct.swift; sourceTree = "<group>"; };
 		CE2046DC1F67B7F400F84E0C /* cafe-data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "cafe-data.swift"; sourceTree = "<group>"; };
 		CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE4EB65D1F16C691000FF48B /* NearableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearableInformation.swift; sourceTree = "<group>"; };
@@ -75,10 +80,13 @@
 		CE5055821EFDF17400F596DB /* estimoteSensorsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = estimoteSensorsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5055861EFDF17400F596DB /* estimoteSensorsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = estimoteSensorsUITests.swift; sourceTree = "<group>"; };
 		CE5055881EFDF17400F596DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE531FE11F9FD690003ECE63 /* NotifStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifStruct.swift; sourceTree = "<group>"; };
 		CE65B2D71F27AFDB0076423D /* RangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeViewController.swift; sourceTree = "<group>"; };
 		CE65B2D91F2814840076423D /* nearableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nearableData.swift; sourceTree = "<group>"; };
 		CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTableViewCell.swift; sourceTree = "<group>"; };
+		CE93901E1F6C499E0067A0C1 /* DatabaseParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseParent.swift; sourceTree = "<group>"; };
 		CEEA0E431F33189000D9954B /* ModelFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFunctions.swift; sourceTree = "<group>"; };
+		CEF0CB271FDB411D00AA40FD /* PasswordReset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordReset.swift; sourceTree = "<group>"; };
 		CEFEAA841F3D8A4E00A2795F /* comments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,12 +167,14 @@
 			isa = PBXGroup;
 			children = (
 				CE5055631EFDF17400F596DB /* AppDelegate.swift */,
-				CE5055651EFDF17400F596DB /* ViewController.swift */,
+				CE531FE11F9FD690003ECE63 /* NotifStruct.swift */,
 				CEEA0E431F33189000D9954B /* ModelFunctions.swift */,
+				CE5055651EFDF17400F596DB /* ViewController.swift */,
 				CE65B2D71F27AFDB0076423D /* RangeViewController.swift */,
 				CE65B2D91F2814840076423D /* nearableData.swift */,
 				CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */,
 				CE5055671EFDF17400F596DB /* Main.storyboard */,
+				CEF0CB271FDB411D00AA40FD /* PasswordReset.swift */,
 				CE50556D1EFDF17400F596DB /* Assets.xcassets */,
 				CE50556F1EFDF17400F596DB /* LaunchScreen.storyboard */,
 				CE5055721EFDF17400F596DB /* Info.plist */,
@@ -175,6 +185,8 @@
 				CE65B2DB1F2A6C0E0076423D /* DebugTableViewCell.swift */,
 				CEFEAA841F3D8A4E00A2795F /* comments.swift */,
 				CE2046DC1F67B7F400F84E0C /* cafe-data.swift */,
+				CE93901E1F6C499E0067A0C1 /* DatabaseParent.swift */,
+				CE1EC46E1F9186EA0008656B /* FireBaseStruct.swift */,
 			);
 			path = estimoteSensors;
 			sourceTree = "<group>";
@@ -275,6 +287,7 @@
 					CE50555F1EFDF17400F596DB = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = VFH547A942;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -285,12 +298,14 @@
 					CE5055761EFDF17400F596DB = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = VFH547A942;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CE50555F1EFDF17400F596DB;
 					};
 					CE5055811EFDF17400F596DB = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = VFH547A942;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = CE50555F1EFDF17400F596DB;
 					};
@@ -494,9 +509,13 @@
 				CE65B2DA1F2814840076423D /* nearableData.swift in Sources */,
 				CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */,
 				CE50556C1EFDF17400F596DB /* estimoteSensors.xcdatamodeld in Sources */,
+				CE531FE21F9FD690003ECE63 /* NotifStruct.swift in Sources */,
 				CEEA0E441F33189000D9954B /* ModelFunctions.swift in Sources */,
+				CE1EC46F1F9186EA0008656B /* FireBaseStruct.swift in Sources */,
 				CE65B2DC1F2A6C0E0076423D /* DebugTableViewCell.swift in Sources */,
+				CEF0CB281FDB411D00AA40FD /* PasswordReset.swift in Sources */,
 				CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */,
+				CE93901F1F6C499E0067A0C1 /* DatabaseParent.swift in Sources */,
 				CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,7 +612,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -639,7 +658,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -661,7 +680,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ishangupta3.estimoteSensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -678,7 +698,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ishangupta3.estimoteSensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_NAME}/ObjCBridge.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -693,7 +714,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensorsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/estimoteSensors.app/estimoteSensors";
 			};
 			name = Debug;
@@ -709,7 +731,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensorsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/estimoteSensors.app/estimoteSensors";
 			};
 			name = Release;
@@ -724,7 +747,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensorsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = estimoteSensors;
 			};
 			name = Debug;
@@ -739,7 +763,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ishangupta3.estimoteSensorsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = estimoteSensors;
 			};
 			name = Release;

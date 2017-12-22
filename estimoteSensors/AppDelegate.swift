@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, EILBackgroundIndoorLocati
             let i = FirebaseStruct(user: (Auth.auth().currentUser?.uid)!, timestamp: Int(Date().timeIntervalSince1970), xCoordinate: position.x, yCoordinate: position.y, location: "asia")
         }
         
-        if position.distance(to: homeStyle) < 0.5 {
+        if position.distance(to: homeStyle) < 2 {
             print("near homestyle")
             let y = FirebaseStruct(user: (Auth.auth().currentUser?.uid)!, timestamp: Int(Date().timeIntervalSince1970), xCoordinate: position.x, yCoordinate: position.y, location: "homestyle")
         }
@@ -155,6 +155,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, EILBackgroundIndoorLocati
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+        
+        
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Please swipe on Notification to keep app in background"
+        content.body = "**This helps us to help you**"
+        content.sound = UNNotificationSound.default()
+        
+        
+        
+
+        // let date 2 = Date.
+        var date = DateComponents()
+        date.hour = 2
+        date.minute = 15
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
+        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     // MARK: - Core Data stack

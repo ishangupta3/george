@@ -21,6 +21,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     
     
     
+    
     //   let triggerManager = ESTTriggerManager()
     
     
@@ -150,15 +151,28 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         debugModeCheck = true
     }
     
+    
+    
     func initNotificationSetupCheck() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert])
-        { (success, error) in
-            if success {
-                print("Permission Granted")
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if granted {
+                print("permission chilling")
             } else {
-                print("There was a problem!")
+                
+                print("No permisison given")
             }
         }
+        
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert])
+//        { (success, error) in
+//            if success {
+//                print("Permission Granted")
+//            } else {
+//                print("There was a problem!")
+//            }
+//        }
     }
     
     
@@ -207,6 +221,9 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     }
     
     
+ 
+    
+    
     
     
     override func viewDidLoad() {
@@ -224,6 +241,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         //        self.triggerManager.startMonitoring(for: trigger)
         
         initNotificationSetupCheck()
+    
         Database.database().isPersistenceEnabled = false
         periManager = CBPeripheralManager.init(delegate: self, queue: nil)
         
@@ -282,13 +300,33 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         content.sound = UNNotificationSound.default()
         
         
-        let date = Date(timeIntervalSinceNow: 60)
+      
         let date1 = Date(timeIntervalSince1970:  1512904556)
         // let date 2 = Date.
-        let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second], from: date1)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+        var date = DateComponents()
+        date.hour =  3
+        date.minute = 52
+    
+   
+      
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
         let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+//        let center = UNUserNotificationCenter.current()
+//        center.add(request, withCompletionHandler: nil)
+//
+        
+//        let notification = UNMutableNotificationContent()
+//        notification.title =  "test:"
+//        notification.subtitle = "this works"
+//        notification.body =  "this works"
+//        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false )
+//        let requestTest = UNNotificationRequest(identifier: "notification1", content: notification, trigger: trigger)
+//        UNUserNotificationCenter.current().add(requestTest, withCompletionHandler: nil)
+//
+//
+//
         
         
     }
@@ -670,7 +708,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     {
         
         
-        notifStruct(title: "Background works", subtitle: "Background Works", body: "This is chill")
+       // notifStruct(title: "Background works", subtitle: "Background Works", body: "This is chill")
         
         
         nearableLocation.backgroundColor = UIColor.blue
@@ -766,7 +804,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         
         // print(identifier)
         
-        notifStruct(title: "This is an exit", subtitle: "chill", body: "chill")
+     //   notifStruct(title: "This is an exit", subtitle: "chill", body: "chill")
         
         //  nearableID.text = "You have left the region"
         

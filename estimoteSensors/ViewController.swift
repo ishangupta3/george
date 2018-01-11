@@ -230,7 +230,9 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         super.viewDidLoad()
         
         print(Auth.auth().currentUser?.email, "!!!!!!!AUTH!!!!!!")
-        
+        let date = DateComponents()
+       
+        print(date.day, "This is the current weekday")
         runTimer()
         //
         //        self.triggerManager.delegate = self
@@ -294,24 +296,24 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         
         
         
-        let content = UNMutableNotificationContent()
-        content.title = "Please swipe on Notification to keep app in background"
-        content.body = "**This helps us to help you**"
-        content.sound = UNNotificationSound.default()
-        
-        
-      
-        let date1 = Date(timeIntervalSince1970:  1512904556)
-        // let date 2 = Date.
-        var date = DateComponents()
-        date.hour =  3
-        date.minute = 52
-    
-   
-      
-        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
-        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
-   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//        let content = UNMutableNotificationContent()
+//        content.title = "Please swipe on Notification to keep app in background"
+//        content.body = "**This helps us to help you**"
+//        content.sound = UNNotificationSound.default()
+//
+//
+//
+//
+//        // let date 2 = Date.
+//        var date = DateComponents()
+//        date.hour =  10
+//        date.minute = 45
+//
+//
+//
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+//        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
+//   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
 //        let center = UNUserNotificationCenter.current()
 //        center.add(request, withCompletionHandler: nil)
@@ -329,6 +331,15 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
 //
         
         
+        
+        
+        
+        
+        
+        
+       runNotification()
+        getData()
+        
     }
     
     
@@ -345,6 +356,31 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         nearableSignal.backgroundColor = UIColor.green
         
         
+        
+    }
+    
+    
+    func runNotification() {
+        
+        var date2 = DateComponents()
+        let content = UNMutableNotificationContent()
+        content.title = "Almoste time for lunch"
+        content.body = ""
+        
+        content.sound = UNNotificationSound.default()
+        
+        // let date 2 = Date.
+        
+        date2.hour =  11
+        date2.minute =  15
+        
+        
+        
+        
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date2, repeats: true)
+        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
     }
     
@@ -845,6 +881,26 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         
+        
+//        let content = UNMutableNotificationContent()
+//        content.title = "Please swipe on Notification to keep app in background"
+//        content.body = "**This helps us to help you**"
+//        content.sound = UNNotificationSound.default()
+//        
+//        
+//        
+//        
+//        // let date 2 = Date.
+//        var date = DateComponents()
+//        date.hour =  10
+//        date.minute = 56
+//        
+//        
+//        
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+//        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//        
         if peripheral.state == .poweredOn {
             print("powerd on")
         }
@@ -858,26 +914,56 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
             nearableID.text = "Bluetooth Turned Off"
             
             
+//
+//            let content = UNMutableNotificationContent()
+//            content.title = "Don't forget to turn ON bluetooth"
+//            content.body = "Thank you"
+//            content.sound = UNNotificationSound.default()
+//
+//
+//            let date = Date(timeIntervalSinceNow: 60)
+//            let date1 = Date(timeIntervalSince1970:  1502710200)
+//            // let date 2 = Date.
+//            let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second], from: date1)
+//            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+//            let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
+//            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             
-            let content = UNMutableNotificationContent()
-            content.title = "Don't forget to turn ON bluetooth"
-            content.body = "Thank you"
-            content.sound = UNNotificationSound.default()
             
             
-            let date = Date(timeIntervalSinceNow: 60)
-            let date1 = Date(timeIntervalSince1970:  1502710200)
-            // let date 2 = Date.
-            let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second], from: date1)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
-            let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            
+           
         }
     }
     
     
+    func getData() {
+        
+        let userID = Auth.auth().currentUser?.uid
     
+        var ref: DatabaseReference! = Database.database().reference()
+        ref.child("XYSENSORS").observe(.value) { snapshot in
+            
+            for child in snapshot.children {
+            //   print(child)
+             //  print(snapshot.value(forKey: "location"))
+            }
+        }
+        
+         ref.child("XYSENSORS").observeSingleEvent(of: .value, with: { (snapshot) in
+        
+            for child in snapshot.children{
+                
+                let snap = child as! DataSnapshot
+                let dict = snap.value as? NSDictionary
+                let location = dict!["userID"]
+                print(location , "this is the userID")
+                
+            }
+            
+            
+        })
+    
+    }
     
     
     func getReadableTimestamp(_ format: String) -> String {
@@ -911,5 +997,11 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     //    }
     
     
+}
+
+extension Date {
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
 }
 

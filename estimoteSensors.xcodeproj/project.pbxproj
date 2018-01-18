@@ -12,6 +12,7 @@
 		CE1EC46F1F9186EA0008656B /* FireBaseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1EC46E1F9186EA0008656B /* FireBaseStruct.swift */; };
 		CE2046DD1F67B7F400F84E0C /* cafe-data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2046DC1F67B7F400F84E0C /* cafe-data.swift */; };
 		CE2A3F691F182F1600D89651 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */; };
+		CE2D6FA6201075BE00482EBD /* GeoFenceCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6FA5201075BE00482EBD /* GeoFenceCode.swift */; };
 		CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB65D1F16C691000FF48B /* NearableInformation.swift */; };
 		CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055631EFDF17400F596DB /* AppDelegate.swift */; };
 		CE5055661EFDF17400F596DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055651EFDF17400F596DB /* ViewController.swift */; };
@@ -65,6 +66,7 @@
 		CE1EC46E1F9186EA0008656B /* FireBaseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseStruct.swift; sourceTree = "<group>"; };
 		CE2046DC1F67B7F400F84E0C /* cafe-data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "cafe-data.swift"; sourceTree = "<group>"; };
 		CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE2D6FA5201075BE00482EBD /* GeoFenceCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoFenceCode.swift; sourceTree = "<group>"; };
 		CE4EB65D1F16C691000FF48B /* NearableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearableInformation.swift; sourceTree = "<group>"; };
 		CE5055601EFDF17400F596DB /* estimoteSensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = estimoteSensors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5055631EFDF17400F596DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				CE5055651EFDF17400F596DB /* ViewController.swift */,
 				CE65B2D71F27AFDB0076423D /* RangeViewController.swift */,
 				CE65B2D91F2814840076423D /* nearableData.swift */,
+				CE2D6FA5201075BE00482EBD /* GeoFenceCode.swift */,
 				CE0A7BBD1F183A6F00541727 /* LoginViewControllerEstimote.swift */,
 				CE5055671EFDF17400F596DB /* Main.storyboard */,
 				CEF0CB271FDB411D00AA40FD /* PasswordReset.swift */,
@@ -506,6 +509,7 @@
 				CEFEAA851F3D8A4E00A2795F /* comments.swift in Sources */,
 				CE2046DD1F67B7F400F84E0C /* cafe-data.swift in Sources */,
 				CE5055661EFDF17400F596DB /* ViewController.swift in Sources */,
+				CE2D6FA6201075BE00482EBD /* GeoFenceCode.swift in Sources */,
 				CE65B2DA1F2814840076423D /* nearableData.swift in Sources */,
 				CE65B2D81F27AFDB0076423D /* RangeViewController.swift in Sources */,
 				CE50556C1EFDF17400F596DB /* estimoteSensors.xcdatamodeld in Sources */,

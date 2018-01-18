@@ -19,8 +19,11 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, EILBackgroundIndoorLocationManagerDelegate {
 
     var window: UIWindow?
-    
+   
     let backgroundIndoorManager = EILBackgroundIndoorLocationManager()
+    
+    
+    var didUserEnter: Bool = false
     
     let asia = EILPoint(x: 6.37, y: 12.96)
     let india = EILPoint(x: 6.16, y: 0.62)
@@ -38,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, EILBackgroundIndoorLocati
         
         // Estimote Beacon Code
         
-        
+ 
         ESTConfig.setupAppID("caf-7az", andAppToken: "23c0e2454af572312419045a789a6340")
         self.backgroundIndoorManager.delegate = self
         self.backgroundIndoorManager.requestAlwaysAuthorization()

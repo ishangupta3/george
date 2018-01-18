@@ -13,26 +13,57 @@ import FirebaseAuth
 import Firebase
 import CoreBluetooth
 
-class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeripheralManagerDelegate,  UITableViewDataSource /* ESTTriggerManagerDelegate  */ {
+
+class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeripheralManagerDelegate,  UITableViewDataSource /* ESTTriggerManagerDelegate  */ {
     // UITableViewDelegate,
     
     @IBOutlet weak var tableView: UITableView!
     
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    //  var x = self.appDelegate.didUserEnter   // THIS IS how you get current value of the app delegate boolean value
     
+    /*
+     
+     Basically use this to put into the daily called functijon if the user entered any of the sensors region or not and contingent upon that then upload data to firebase
+     
+     
+     
+     
+     */
     
     
     //   let triggerManager = ESTTriggerManager()
     
     
+   
+    /*
+     
+     Todays work
+     
+       - reverse list
+       - add functionality for every day 2 pm
+       - notif should only work on weekday 
+     
+ 
+ 
+    */
+    var timestampExist:Bool = false
+    var checkDate: String = ""
     var nearableManager: ESTNearableManager
     var nearable: ESTNearable
-    
+    var databaseTimeStamp: Double = 0
     var broadcastingValue: ESTSettingNearableBroadcastingScheme
-    
+    var isComplete: Bool = false
     var periManager: CBPeripheralManager!
+    var y: Int = 0
     var ref: DatabaseReference!
     var ref2: DatabaseReference!
+    
+    var locationValues: [String: Int] =  ["asia" : 0,
+                                          "burger": 0,
+                                          "homestyle": 0,
+                                          "india" : 0]
     
     @IBOutlet weak var nearableLocation: UILabel!
     
@@ -46,6 +77,9 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     
     var  debugSignalStrengthArray: [Int] = []
     var debugRangedSensorTitle: [String] = []
+    
+    var locationArray: Array<Any>
+    var locationDate: Array = [""]
     
     @IBOutlet weak var nearableLocation3: UILabel!
     
@@ -130,7 +164,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         self.nearable = ESTNearable()
         self.nearableManager = ESTNearableManager()
         self.broadcastingValue = ESTSettingNearableBroadcastingScheme()
-        
+        self.locationArray = [""]
         
         super.init(coder: aDecoder)
         
@@ -141,12 +175,12 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     var debugModeCheck: Bool = false
     @IBAction func debugMode(_ sender: Any) {
         
-//        do {
-//            try Auth.auth().signOut()
-//            print("signedoout")
-//        } catch (let error) {
-//            print((error as NSError).code)
-//        }
+        //        do {
+        //            try Auth.auth().signOut()
+        //            print("signedoout")
+        //        } catch (let error) {
+        //            print((error as NSError).code)
+        //        }
         
         debugModeCheck = true
     }
@@ -165,46 +199,71 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
             }
         }
         
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert])
-//        { (success, error) in
-//            if success {
-//                print("Permission Granted")
-//            } else {
-//                print("There was a problem!")
-//            }
-//        }
+        
     }
     
     
     /// TABLE VIEW delegated methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //  return nearablesRangedArray[0].count  //DONT FORGET TO UPDATE THIS VALUE
-        return debugRangedSensorTitle.count
+        
+        
+        let ref: DatabaseReference! = Database.database().reference()
+        ref.child("final").observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot.childrenCount, "count of children")
+            print(snapshot,"this IS THE CHILD")
+            print(self.returnUserEntries(snapshot: snapshot), "this is new function value")
+            
+            
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let snapDict = snap.value as? NSDictionary
+                
+                let finalUserID = snapDict!["userID"]
+                //finalUserID  as? String
+                if  finalUserID  as? String  == Auth.auth().currentUser?.uid && self.y < self.returnUserEntries(snapshot: snapshot) {
+                    
+                    
+                    self.y += 1
+                }
+            }
+            
+            
+            
+            
+        })
+        
+        print(self.y, "this is the value of y")
+        return self.y
+    }
+    
+    
+    func returnUserEntries(snapshot: DataSnapshot) -> Int {
+        var totalValue: Int = 0
+        
+        
+        for child in snapshot.children {
+            let snap = child as! DataSnapshot
+            let snapDict = snap.value as? NSDictionary
+            
+            let finalUserID = snapDict!["userID"]
+            //finalUserID  as? String
+            if  finalUserID  as? String  == Auth.auth().currentUser?.uid {
+                
+                totalValue += 1
+            }
+        }
+        return totalValue
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        /*  REMOVE AFTER TESTING
-         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-         if cell == nil {
-         cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-         
-         }
-         
-         cell!.textLabel?.text = nearablesRangedArray[indexPath.row]
-         return cell!
-         
-         */  //  REMOVE AFTER TESTING
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DebugTableViewCell
-        // cell.nearableSensorTitle.text = nearablesRangedArray[0][indexPath.row]
-        cell.nearableSensorTitle.text = debugRangedSensorTitle[indexPath.row]
-        cell.signalStrengthTitle.text = String(debugSignalStrengthArray[indexPath.row])
+        print(indexPath.count, "index path count")
+        
+        cell.nearableSensorTitle.text = self.locationArray[indexPath.row] as! String
+        
+        cell.signalStrengthTitle.text = self.locationDate[indexPath.row]
         return cell
-        
-        
         
         
     }
@@ -221,7 +280,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     }
     
     
- 
+    
     
     
     
@@ -231,8 +290,8 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         
         print(Auth.auth().currentUser?.email, "!!!!!!!AUTH!!!!!!")
         let date = DateComponents()
-       
-        print(date.day, "This is the current weekday")
+        
+        // print(date.day, "This is the current weekday")
         runTimer()
         //
         //        self.triggerManager.delegate = self
@@ -243,14 +302,15 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         //        self.triggerManager.startMonitoring(for: trigger)
         
         initNotificationSetupCheck()
-    
+        
         Database.database().isPersistenceEnabled = false
         periManager = CBPeripheralManager.init(delegate: self, queue: nil)
         
         
-        //  tableView.dataSource = self REMOVE AFTER TESTING
+        //   tableView.dataSource = self //REMOVE AFTER TESTING
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(ViewController.populate), for: UIControlEvents.valueChanged)
+        
         tableView.addSubview(refresher)
         
         
@@ -289,58 +349,68 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         
         
         
-        //  *****************************************************   - Debugging Code- VIEW DID LOAD
-        
-        
-        //***********************************************
         
         
         
-//        let content = UNMutableNotificationContent()
-//        content.title = "Please swipe on Notification to keep app in background"
-//        content.body = "**This helps us to help you**"
-//        content.sound = UNNotificationSound.default()
-//
-//
-//
-//
-//        // let date 2 = Date.
-//        var date = DateComponents()
-//        date.hour =  10
-//        date.minute = 45
-//
-//
-//
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-//        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
-//   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        
-//        let center = UNUserNotificationCenter.current()
-//        center.add(request, withCompletionHandler: nil)
-//
-        
-//        let notification = UNMutableNotificationContent()
-//        notification.title =  "test:"
-//        notification.subtitle = "this works"
-//        notification.body =  "this works"
-//        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false )
-//        let requestTest = UNNotificationRequest(identifier: "notification1", content: notification, trigger: trigger)
-//        UNUserNotificationCenter.current().add(requestTest, withCompletionHandler: nil)
-//
-//
-//
-        
-        
-        
-        
-        
-        
-        
-        
-       runNotification()
-        getData()
+        runNotification()
+        runCode2PM()
+       // getData()
+        translateUnixTime(time: 1515448224 )
+        updateLocationArrayValues()
+        updateLocationDates()
         
     }
+    
+    func updateLocationArrayValues() {
+        
+        let ref: DatabaseReference! = Database.database().reference()
+        //  ref.child("XYSENSORS").observe(.value) { snapshot in
+        ref.child("final").observe(.value) { (snapshot) in
+            
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let snapDict = snap.value as? NSDictionary
+                let finalUserID = snapDict!["userID"]
+                let finalLocation = snapDict!["location"]
+                let finalTimestamp = snapDict!["timestamp"]
+                
+                if  (finalUserID as AnyObject) as? String == Auth.auth().currentUser?.uid {
+                    self.locationArray.append(finalLocation as! String)
+                    self.locationArray.reverse()
+                    
+                    
+                }
+            }
+        }
+        
+    }
+    
+    
+    func updateLocationDates() {
+        
+        let ref: DatabaseReference! = Database.database().reference()
+        //  ref.child("XYSENSORS").observe(.value) { snapshot in
+        ref.child("final").observe(.value) { (snapshot) in
+            
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let snapDict = snap.value as? NSDictionary
+                let finalUserID = snapDict!["userID"]
+                let finalLocation = snapDict!["location"]
+                let finalTimestamp = snapDict!["timestamp"]
+                
+                if  (finalUserID as AnyObject) as? String == Auth.auth().currentUser?.uid {
+                    
+                    var updatedLocation: String = self.convertIntoReadable(time: finalTimestamp as! Double)
+                    self.locationDate.append(updatedLocation)
+                    self.locationDate.reverse()
+                    
+                }
+            }
+        }
+        
+    }
+    
     
     
     
@@ -352,35 +422,24 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     
     @objc func updateTimer() {
         
-        nearableLocation.backgroundColor = UIColor.green
-        nearableSignal.backgroundColor = UIColor.green
-        
-        
         
     }
     
     
-    func runNotification() {
+    func runNotification() {  // need to create 5 different notifications
         
         var date2 = DateComponents()
         let content = UNMutableNotificationContent()
         content.title = "Almoste time for lunch"
-        content.body = ""
+        content.body = "Swipe to keep in background"
         
         content.sound = UNNotificationSound.default()
+            createNotification(index: 1, content: content)
+        print(date2.weekday)
         
-        // let date 2 = Date.
-        
-        date2.hour =  11
-        date2.minute =  15
-        
-        
-        
-        
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: date2, repeats: true)
-        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        //        let trigger = UNCalendarNotificationTrigger(dateMatching: date2, repeats: true)
+        //        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
+        //        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
     }
     
@@ -414,308 +473,10 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
                 "timestamp": Int(Date().timeIntervalSince1970),
                 "location" : nearableInformation[nearable.identifier]!["location"]!
             ]
-          let ref = Database.database().reference().child("Everything").childByAutoId()
-         //   let ref = Database.database().reference().child("TESTING").childByAutoId()
+            let ref = Database.database().reference().child("Everything").childByAutoId()
+            //   let ref = Database.database().reference().child("TESTING").childByAutoId()
             ref.setValue(everything)
         }
-        
-        // SEND to DB (Everything)
-        
-    
-        debugSignalStrengthArray.removeAll()
-        debugRangedSensorTitle.removeAll()
-        
-        
-        //    *********************************    Start of the bug fixing
-        
-        /*
-         
-         if nearable.rssi != 127 {
-         
-         for (location, lastSeenSensorTime) in sensorInfoTime {
-         
-         if location == nearableName! {
-         
-         if lastSeenSensorTime == 0 ||  Int(Date().timeIntervalSince1970) - lastSeenSensorTime <= 5 {
-         
-         sensorInfo.updateValue(0, forKey: nearableName!)
-         
-         // send to DB because it is the first time app has come across the sensor
-         
-         let cleaned: NSDictionary
-         cleaned = [
-         
-         
-         "userID" : user!.uid,
-         "RSSI": (nearable.rssi),
-         "timestamp": Int(Date().timeIntervalSince1970),
-         "location" : nearableInformation[nearable.identifier]!["location"]!
-         
-         ]
-         
-         //  print(nearable.rssi)
-         let ref = Database.database().reference().child("Everything").childByAutoId()
-         ref.setValue(cleaned)
-         
-         //                        DatabaseParent.init(userID: user!.uid, timeStamp: Int(Date().timeIntervalSince1970) , location: nearableInformation[nearable.identifier]!["location"]!, signalStrength: nearable.rssi)
-         
-         
-         
-         } else {
-         
-         
-         //  print(Int(Date().timeIntervalSince1970) - lastSeenSensorTime, "More then 5 Seconds", nearable.rssi)
-         
-         
-         // send second value onwards to the database ----- >
-         
-         // everything under this is essentially useless -- > might want to remove
-         
-         for (location, timeIncrementer) in sensorInfo {
-         
-         //  print(Int(Date().timeIntervalSince1970) - lastSeenSensorTime)
-         
-         if location == nearableName! {
-         
-         var x = timeIncrementer
-         x += 1
-         sensorInfo.updateValue(x, forKey: nearableName!)
-         // print("getting rid of this signal Strength", nearable.rssi)
-         if x >= 3  { // does using "x" work
-         
-         // SEND to DB || this is removing the first bad entry in a new list of signal strengths
-         
-         
-         }
-         
-         
-         }
-         }
-         
-         
-         
-         }
-         
-         //   print(Int(Date().timeIntervalSince1970) - lastSeenSensorTime)
-         
-         }
-         
-         }
-         
-         
-         }
-         
-         sensorInfoTime.updateValue(Int(Date().timeIntervalSince1970), forKey: nearableName!) // getting the last time signal of the last sensor
-         
-         
-         
-         
-         
-         
-         
-         //    *********************************    END of the bug fixing
-         
-         if nearable.rssi != 127 {
-         
-         
-         for (location, timeIncrementer) in sensorInfo {
-         
-         if location == nearableName! {
-         
-         sensorInfoMissing.updateValue(0, forKey: nearableName!) // nearable not missing anymore (found)
-         
-         
-         
-         
-         var x = timeIncrementer
-         x += 1
-         sensorInfo.updateValue(x, forKey: nearableName!)
-         
-         if x >= 2  { // does using "x" work
-         
-         // SEND to DB || this is removing the first bad entry in a new list of signal strengths
-         
-         let cleaned: NSDictionary
-         cleaned = [
-         
-         
-         "userID" : user!.uid,
-         "RSSI": (nearable.rssi),
-         "timestamp": Int(Date().timeIntervalSince1970),
-         "location" : nearableInformation[nearable.identifier]!["location"]!
-         
-         ]
-         
-         
-         let ref = Database.database().reference().child("Cleaned").childByAutoId()
-         ref.setValue(cleaned)
-         
-         
-         }
-         
-         
-         }
-         
-         
-         
-         
-         for (location, timeIncrementerMissing) in sensorInfoMissing {
-         
-         if location != nearableName! {
-         
-         var y = timeIncrementerMissing
-         y += 1
-         sensorInfoMissing.updateValue(y, forKey: nearableName!)
-         
-         if y >= 5 {
-         
-         sensorInfo.updateValue(0, forKey: nearableName!)
-         
-         }
-         
-         }
-         
-         
-         
-         }
-         
-         
-         }
-         
-         
-         }
-         
-         
-         
-         */
-        
-        
-        
-        //   ****
-        
-        
-        /*      Average Loop Algo
-         
-         if  nearable.rssi != 127 {
-         
-         
-         for (location, timeIncrementer)  in sensorInfo {
-         
-         if location == nearableName! {
-         
-         
-         var x = timeIncrementer
-         x += 1
-         sensorInfo.updateValue(x, forKey: nearableName!)
-         
-         
-         for (locationAverage, sensorStrengthAverage) in sensorInfoAverage {
-         
-         if locationAverage == nearableName! { // checking for signal average dict
-         
-         var y = sensorStrengthAverage
-         y += nearable.rssi
-         sensorInfoAverage.updateValue(y, forKey: nearableName!)   // updating the average of the sums of the nearable signals
-         
-         if   sendDataCheck(timeCounter: timeIncrementer) == true    {
-         
-         sensorInfo.updateValue(0, forKey: nearableName!)
-         
-         if sendAverageCheck(averageCounter: sensorStrengthAverage) == true  {                                     // do if else and the else will update the average value to 0...
-         
-         
-         // DO THE AVERAGE HER OF THE INCREMENTED DATA THEN CREATE ANOTHER IF
-         
-         
-         
-         let dateData: NSDictionary
-         dateData = ["userID" : user!.uid,
-         "RSSI": nearable.rssi, // check if it works with x cross check it with physical number
-         "timestamp": ServerValue.timestamp(),
-         "location" : nearableInformation[nearable.identifier]!["location"]!]
-         
-         
-         
-         
-         //  let ref = Database.database().reference().childByAutoId()
-         let ref = Database.database().reference().child("strictFiltered").childByAutoId()
-         //   ref.setValue(dateData)
-         
-         // self.nearableManager.startMonitoring(forIdentifier: nearable.identifier)
-         
-         sensorInfoAverage.updateValue(0, forKey: nearableName!) // refresh the value to 0 for sensor
-         
-         
-         
-         }   else {  // inner if loop checking the average to be under 75
-         
-         sensorInfoAverage.updateValue(0, forKey: nearableName!)
-         }
-         } // checking the counter value to be 5 readings
-         
-         }
-         
-         }  // inner for loop for average
-         
-         }
-         
-         
-         }
-         
-         
-         }
-         
-         
-         
-         */
-        
-        
-        //***
-        
-        //   print(sensorInfo)
-        
-        
-        
-        
-        for  (location, timeIncrementer) in sensorInfo {
-            
-            
-            debugSignalStrengthArray.append(timeIncrementer)
-            debugRangedSensorTitle.append(location)
-            
-            
-            
-            
-            
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        if debugModeCheck == true {
-            
-            self.view.backgroundColor = UIColor.red
-            nearableLocation.text =  nearableInformation[nearable.identifier]!["location"]!
-            nearableLocation.backgroundColor = UIColor.black
-            nearableSignal.backgroundColor = UIColor.black
-            nearableSignal.text = String(nearable.rssi)
-            
-        }
-        
-        
-        
-        
-        
-        //****************************************************************************** -> Debugging Code
-        
-        
-        
-        
-        // print(user!.uid)
         
         
         
@@ -744,7 +505,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     {
         
         
-       // notifStruct(title: "Background works", subtitle: "Background Works", body: "This is chill")
+        // notifStruct(title: "Background works", subtitle: "Background Works", body: "This is chill")
         
         
         nearableLocation.backgroundColor = UIColor.blue
@@ -783,46 +544,6 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         
         
         
-        /*
-         
-         
-         
-         if nearableLocation.text == "" {
-         
-         nearableLocation.text = nearableInformation[identifier]!["location"]!
-         nearableLocation.backgroundColor = UIColor.blue
-         nearableSignal.backgroundColor = UIColor.white
-         nearableLocation3.backgroundColor = UIColor.white
-         
-         
-         } else if nearableSignal.text == "" {
-         
-         nearableSignal.text = nearableInformation[identifier]!["location"]
-         nearableSignal.backgroundColor = UIColor.red
-         nearableLocation.backgroundColor = UIColor.white
-         nearableLocation3.backgroundColor = UIColor.white
-         } else {
-         
-         
-         nearableLocation3.text = nearableInformation[identifier]!["location"]
-         nearableLocation3.backgroundColor = UIColor.green
-         nearableSignal.backgroundColor = UIColor.white
-         nearableLocation.backgroundColor = UIColor.white
-         }
-         
-         
-         
-         
-         
-         
-         
-         
-         // END of did ENTER REGION
-         
-         
-         
-         */
-        
     }
     
     
@@ -838,38 +559,7 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         
         print("you left the region ******** BYE BYE ")
         
-        // print(identifier)
         
-     //   notifStruct(title: "This is an exit", subtitle: "chill", body: "chill")
-        
-        //  nearableID.text = "You have left the region"
-        
-        /*
-         
-         let refExit = Database.database().reference().child((user?.uid)!).child("Exit")
-         let dateExitData: NSDictionary = [ "timestamp": ServerValue.timestamp(),
-         "location" : nearableInformation[identifier]!["location"]!]
-         let key = refExit.childByAutoId().key
-         refExit.child(key).setValue(dateExitData)
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         let notification = UNMutableNotificationContent()
-         notification.title = "you have left the region"
-         notification.subtitle = "bye bye"
-         notification.body = "have fun"
-         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-         let request = UNNotificationRequest(identifier: "notification1", content: notification, trigger: notificationTrigger)
-         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-         
-         
-         */
         
         self.nearableManager.startRanging(forIdentifier: identifier)
         self.nearableManager.startMonitoring(forIdentifier: identifier)
@@ -882,87 +572,144 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         
         
-//        let content = UNMutableNotificationContent()
-//        content.title = "Please swipe on Notification to keep app in background"
-//        content.body = "**This helps us to help you**"
-//        content.sound = UNNotificationSound.default()
-//        
-//        
-//        
-//        
-//        // let date 2 = Date.
-//        var date = DateComponents()
-//        date.hour =  10
-//        date.minute = 56
-//        
-//        
-//        
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-//        let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
-//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-//        
+        //
         if peripheral.state == .poweredOn {
             print("powerd on")
         }
         if peripheral.state == .poweredOff {
-            let alert = UIAlertController(title: "Bluetooth is turned Off", message: "To continue, plese turn bluetooth on!", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
-            self.view.backgroundColor = UIColor.black
-            nearableID.textColor = UIColor.white
-            nearableID.text = "Bluetooth Turned Off"
-            
-            
-//
-//            let content = UNMutableNotificationContent()
-//            content.title = "Don't forget to turn ON bluetooth"
-//            content.body = "Thank you"
-//            content.sound = UNNotificationSound.default()
-//
-//
-//            let date = Date(timeIntervalSinceNow: 60)
-//            let date1 = Date(timeIntervalSince1970:  1502710200)
-//            // let date 2 = Date.
-//            let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second], from: date1)
-//            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
-//            let request = UNNotificationRequest(identifier: "notification1", content: content, trigger: trigger)
-//            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             
             
             
-           
+            
         }
     }
     
     
-    func getData() {
-        
-        let userID = Auth.auth().currentUser?.uid
+       @objc func getData() { // have this function everyday at 2 PM
     
+        let userID:String = Auth.auth().currentUser!.uid
+        
         var ref: DatabaseReference! = Database.database().reference()
         ref.child("XYSENSORS").observe(.value) { snapshot in
             
             for child in snapshot.children {
-            //   print(child)
-             //  print(snapshot.value(forKey: "location"))
+                //   print(child)
+                //  print(snapshot.value(forKey: "location"))
             }
         }
         
-         ref.child("XYSENSORS").observeSingleEvent(of: .value, with: { (snapshot) in
-        
+        ref.child("XYSENSORS").observeSingleEvent(of: .value, with: { (snapshot) in
+            
             for child in snapshot.children{
                 
                 let snap = child as! DataSnapshot
                 let dict = snap.value as? NSDictionary
-                let location = dict!["userID"]
-                print(location , "this is the userID")
+                let user  = dict!["userID"]
+                let date = dict!["timestamp"]
+                let userLocation = dict!["location"]
+                //== userID
+    if (user as! AnyObject) as! String == userID  && (self.translateUnixTime(time: date as! Double) == self.translateUnixTime(time: self.getCurrentUnixTime())){
+                    self.databaseTimeStamp = date as! Double
+                    for (locationStation, timeIncrementer) in self.locationValues {
+                        if (locationStation == userLocation as! String) {
+                            var x: Int = timeIncrementer
+                            x += 1
+                            self.locationValues.updateValue(x, forKey: locationStation)
+                        }
+                    }
+                    print(user , "this is the userID")
+                    print(date , "this is the data of the user")
+                    print(userLocation, "This is the location of the user")
+                    
+                    let currentTime = date
+                    
+                    
+                }
+                
+                
                 
             }
             
             
+            self.sendToDataBase(time: self.databaseTimeStamp) // do GCD here
+            self.locationValues.updateValue(0, forKey: "asia")
+            self.locationValues.updateValue(0, forKey: "india")
+            self.locationValues.updateValue(0, forKey: "burger")
+            self.locationValues.updateValue(0, forKey: "homestyle")
+            
+            
+            
         })
+        
+    }
     
+    
+    
+    //    let everything: NSDictionary
+    //    everything = [
+    //    "userID" : self.user!.uid,
+    //    "RSSI": (nearable.rssi),
+    //    "timestamp": Int(Date().timeIntervalSince1970),
+    //    "location" : nearableInformation[nearable.identifier]!["location"]!
+    //    ]
+    //    let ref = Database.database().reference().child("Everything").childByAutoId()
+    //    //   let ref = Database.database().reference().child("TESTING").childByAutoId()
+    //    ref.setValue(everything)
+    
+    func sendToDataBase(time: Double) { // do a check if time does not equal to zero
+        
+        if time != 0 {
+            var max: Int = 0
+            var maxLocation: String = ""
+            for(locationStation, timeIncrementer) in self.locationValues {
+                print(locationStation, timeIncrementer)
+                if timeIncrementer >= max {
+                    max = timeIncrementer
+                    maxLocation = locationStation
+                }
+            }
+            
+            let final: NSDictionary
+            final = [
+                "userID" :  Auth.auth().currentUser!.uid,
+                //  "userID" :  "hIp8zCKqYjTCck13JFAeCYWwBIo2",
+                "location" : maxLocation,
+                "timestamp" : time
+                
+            ]
+            
+            
+             var ref2: DatabaseReference! = Database.database().reference()
+            ref2.child("final").observe(.value) { snapshot in
+                // check if time already exists in the database that your about to send to
+                
+                for child in snapshot.children{
+                    
+                    let snap = child as! DataSnapshot
+                    let dict = snap.value as? NSDictionary
+                    let date = dict!["timestamp"]
+                    
+                    if date as! Double  == time {  // check if it already exists in the database
+                        
+                        self.timestampExist = true
+                        
+                    } else {
+                        self.timestampExist = false
+                    }
+                    
+                }
+            }
+            
+            
+            if translateUnixTime(time: time) != self.checkDate && self.timestampExist == false {
+                self.checkDate = translateUnixTime(time: time)
+                print(max, maxLocation)
+                let ref = Database.database().reference().child("final").childByAutoId()
+                ref.setValue(final)
+                
+            }
+            
+        }
     }
     
     
@@ -977,6 +724,50 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
         return datetime
     }
     
+    func getCurrentUnixTime() -> Double {
+        
+        let timestamp = NSDate().timeIntervalSince1970
+        return timestamp
+        
+        
+    }
+    
+    func translateUnixTime(time: Double) -> String {
+        
+        let date = NSDate(timeIntervalSince1970: time )
+        let dateFormatter = DateFormatter()
+        // dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+        dateFormatter.dateFormat = "D"
+        dateFormatter.timeZone = NSTimeZone(name: "PST") as! TimeZone
+        
+        let localDate = dateFormatter.string(from: date as Date)
+        
+        print(localDate)
+        return localDate
+        
+        
+    }
+    
+    
+    func convertIntoReadable(time: Double) -> String {
+        
+        let date = NSDate(timeIntervalSince1970: time )
+        let dateFormatter = DateFormatter()
+        // dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+        dateFormatter.dateFormat = "MM/DD/YYYY"
+        dateFormatter.timeZone = NSTimeZone(name: "PST") as! TimeZone
+        
+        let localDate = dateFormatter.string(from: date as Date)
+        
+        print(localDate)
+        return localDate
+        
+        
+    }
+    
+    
     
     
     func getDateTime() -> String{
@@ -985,19 +776,38 @@ class ViewController: RangeViewController, ESTNearableManagerDelegate, CBPeriphe
     }
     
     
+    func runCode2PM() {
+        var date2 = DateComponents()
+        date2.year = 2018
+        date2.day = 17
+        date2.month = 1
+        date2.hour = 15
+        date2.minute = 30
+        
+        
+        var date = Date()
+        let date3 = Calendar.current.date(from: date2)!
+        
+      //  print(date3)
+     
+        let timer = Timer(fireAt: date3, interval: 86400, target: self, selector: #selector(getData), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+        
+        
+    }
+
     
-    //
-    //    func triggerManager(_ manager: ESTTriggerManager,triggerChangedState trigger: ESTTrigger) {
-    //        if (trigger.identifier == "goodboy") {
-    //            print("Hello, digital world! The physical world has spoken.")
-    //            print("Identifier has been foubd", trigger.identifier)
-    //        } else {
-    //            print("Goodnight. <spoken in the voice of a turret from Portal>")
-    //        }
-    //    }
+    
+
     
     
 }
+ // Code for running results everyday at 2 PM
+
+
+
+
+
 
 extension Date {
     func dayNumberOfWeek() -> Int? {

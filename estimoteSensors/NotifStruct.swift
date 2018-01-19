@@ -56,7 +56,7 @@ func createNotification(index: Int, content: UNNotificationContent) {
     date4.weekday = 4
     
     date5.hour = 11
-    date5.minute = 15       // THURSDAY
+    date5.minute = 15      // THURSDAY
     date5.weekday = 5
     
     date6.hour = 11

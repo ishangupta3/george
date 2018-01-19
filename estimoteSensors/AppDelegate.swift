@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, EILBackgroundIndoorLocati
  
         ESTConfig.setupAppID("caf-7az", andAppToken: "23c0e2454af572312419045a789a6340")
         self.backgroundIndoorManager.delegate = self
-        self.backgroundIndoorManager.requestAlwaysAuthorization()
+      //  self.backgroundIndoorManager.requestAlwaysAuthorization()
         
         
         

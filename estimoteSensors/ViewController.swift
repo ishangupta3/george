@@ -14,40 +14,19 @@ import Firebase
 import CoreBluetooth
 
 
-class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeripheralManagerDelegate,  UITableViewDataSource /* ESTTriggerManagerDelegate  */ {
+class ViewController:  RangeViewController, Maps,  ESTNearableManagerDelegate, CBPeripheralManagerDelegate,  UITableViewDataSource /* ESTTriggerManagerDelegate  */ {
+    
+    
+    
+    
+    
     // UITableViewDelegate,
     
     @IBOutlet weak var tableView: UITableView!
     
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    //  var x = self.appDelegate.didUserEnter   // THIS IS how you get current value of the app delegate boolean value
     
-    /*
-     
-     Basically use this to put into the daily called functijon if the user entered any of the sensors region or not and contingent upon that then upload data to firebase
-     
-     
-     
-     
-     */
-    
-    
-    //   let triggerManager = ESTTriggerManager()
-    
-    
-   
-    /*
-     
-     Todays work
-     
-       - reverse list
-       - add functionality for every day 2 pm
-       - notif should only work on weekday 
-     
- 
- 
-    */
     var timestampExist:Bool = false
     var checkDate: String = ""
     var nearableManager: ESTNearableManager
@@ -59,6 +38,13 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
     var y: Int = 0
     var ref: DatabaseReference!
     var ref2: DatabaseReference!
+    
+    
+    //Geofence code ***
+    
+    
+    
+    //Geofence code ***
     
     var locationValues: [String: Int] =  ["asia" : 0,
                                           "burger": 0,
@@ -79,7 +65,7 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
     var debugRangedSensorTitle: [String] = []
     
     var locationArray: Array<Any>
-    var locationDate: Array = [""]
+    var locationDate: Array = ["01/01/2018"]
     
     @IBOutlet weak var nearableLocation3: UILabel!
     
@@ -164,7 +150,7 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
         self.nearable = ESTNearable()
         self.nearableManager = ESTNearableManager()
         self.broadcastingValue = ESTSettingNearableBroadcastingScheme()
-        self.locationArray = [""]
+        self.locationArray = ["Asia"]
         
         super.init(coder: aDecoder)
         
@@ -314,21 +300,21 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
         tableView.addSubview(refresher)
         
         
-        
-        self.nearableManager.startMonitoring(forIdentifier: "0ab1d9bd539d61a0")  // TemplatesEntrance    // installed
-        self.nearableManager.startMonitoring(forIdentifier: "2d54e81304d984af")  // TemplatesDishwasher  // installed
-        self.nearableManager.startMonitoring(forIdentifier: "21e91bbf6cf59076")  //Templates Asia        // installed
-        self.nearableManager.startMonitoring(forIdentifier: "9713290c1e7c1016")  // TemplatesIndia      // installed
-        self.nearableManager.startMonitoring(forIdentifier: "86032bc0d660db2b")   //Templateshomestyle   // installed
-        self.nearableManager.startMonitoring(forIdentifier: "a18c67f6cbf70ee6")   // TemplatesBurger    // installed
-        self.nearableManager.startMonitoring(forIdentifier: "9d1fcf092f7f7c5e")   // PalletesEntrance
-        self.nearableManager.startMonitoring(forIdentifier: "726477ebba894da0")   // PalletesSalad
-        self.nearableManager.startMonitoring(forIdentifier: "7e87ff288c396700")   // PalletesDishwasher
-        self.nearableManager.startMonitoring(forIdentifier: "2e59eb1b7809cd54")   // PalletesSushi
-        self.nearableManager.startMonitoring(forIdentifier: "b5a3395f8bb86c97")    // Palletes Pizza
-        self.nearableManager.startMonitoring(forIdentifier: "f348b513c73f8900")   // Palletes Greek Mexican
-        self.nearableManager.startMonitoring(forIdentifier: "bf3a127b7d4fdcd3")   // Layers
-        self.nearableManager.startMonitoring(forIdentifier: "b525098a0dce7b05")   // BackgroundTestPurpleFridge
+        //
+        //        self.nearableManager.startMonitoring(forIdentifier: "0ab1d9bd539d61a0")  // TemplatesEntrance    // installed
+        //        self.nearableManager.startMonitoring(forIdentifier: "2d54e81304d984af")  // TemplatesDishwasher  // installed
+        //        self.nearableManager.startMonitoring(forIdentifier: "21e91bbf6cf59076")  //Templates Asia        // installed
+        //        self.nearableManager.startMonitoring(forIdentifier: "9713290c1e7c1016")  // TemplatesIndia      // installed
+        //        self.nearableManager.startMonitoring(forIdentifier: "86032bc0d660db2b")   //Templateshomestyle   // installed
+        //        self.nearableManager.startMonitoring(forIdentifier: "a18c67f6cbf70ee6")   // TemplatesBurger    // installed
+        //        self.nearableManager.startMonitoring(forIdentifier: "9d1fcf092f7f7c5e")   // PalletesEntrance
+        //        self.nearableManager.startMonitoring(forIdentifier: "726477ebba894da0")   // PalletesSalad
+        //        self.nearableManager.startMonitoring(forIdentifier: "7e87ff288c396700")   // PalletesDishwasher
+        //        self.nearableManager.startMonitoring(forIdentifier: "2e59eb1b7809cd54")   // PalletesSushi
+        //        self.nearableManager.startMonitoring(forIdentifier: "b5a3395f8bb86c97")    // Palletes Pizza
+        //        self.nearableManager.startMonitoring(forIdentifier: "f348b513c73f8900")   // Palletes Greek Mexican
+        //        self.nearableManager.startMonitoring(forIdentifier: "bf3a127b7d4fdcd3")   // Layers
+        //        self.nearableManager.startMonitoring(forIdentifier: "b525098a0dce7b05")   // BackgroundTestPurpleFridge
         
         // insert other nearable to see if the code will work
         
@@ -350,11 +336,19 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
         
         
         
+        // ************************ Geo Fence code
+        
+        
+        
+        
+        
+        
+        // ************************ Geo Fence code
         
         
         runNotification()
         runCode2PM()
-       // getData()
+        // getData()
         translateUnixTime(time: 1515448224 )
         updateLocationArrayValues()
         updateLocationDates()
@@ -416,7 +410,7 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
     
     func runTimer() {
         
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+        // timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
     }
     
     
@@ -434,7 +428,7 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
         content.body = "Swipe to keep in background"
         
         content.sound = UNNotificationSound.default()
-            createNotification(index: 1, content: content)
+        createNotification(index: 1, content: content)
         print(date2.weekday)
         
         //        let trigger = UNCalendarNotificationTrigger(dateMatching: date2, repeats: true)
@@ -508,11 +502,11 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
         // notifStruct(title: "Background works", subtitle: "Background Works", body: "This is chill")
         
         
-        nearableLocation.backgroundColor = UIColor.blue
+        //  nearableLocation.backgroundColor = UIColor.blue
         nearableSignal.backgroundColor = UIColor.blue
         print("You have entered the REGION******* HELLO")
         self.view.backgroundColor = UIColor.white
-        nearableID.textColor = UIColor.black
+        //  nearableID.textColor = UIColor.black
         // print("*******************************************************************************")
         print("You have entered the REGION******* HELLO")
         print("**************************MONITORED**********************")
@@ -585,8 +579,8 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
     }
     
     
-       @objc func getData() { // have this function everyday at 2 PM
-    
+    @objc func getData() { // have this function everyday at 2 PM
+        
         let userID:String = Auth.auth().currentUser!.uid
         
         var ref: DatabaseReference! = Database.database().reference()
@@ -608,7 +602,7 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
                 let date = dict!["timestamp"]
                 let userLocation = dict!["location"]
                 //== userID
-    if (user as! AnyObject) as! String == userID  && (self.translateUnixTime(time: date as! Double) == self.translateUnixTime(time: self.getCurrentUnixTime())){
+                if (user as! AnyObject) as! String == userID  && (self.translateUnixTime(time: date as! Double) == self.translateUnixTime(time: self.getCurrentUnixTime())){
                     self.databaseTimeStamp = date as! Double
                     for (locationStation, timeIncrementer) in self.locationValues {
                         if (locationStation == userLocation as! String) {
@@ -657,7 +651,7 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
     //    ref.setValue(everything)
     
     func sendToDataBase(time: Double) { // do a check if time does not equal to zero
-        
+        let q = DispatchQueue(label: "chill")
         if time != 0 {
             var max: Int = 0
             var maxLocation: String = ""
@@ -679,35 +673,47 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
             ]
             
             
-             var ref2: DatabaseReference! = Database.database().reference()
+            
+            var ref2: DatabaseReference! = Database.database().reference()
             ref2.child("final").observe(.value) { snapshot in
                 // check if time already exists in the database that your about to send to
                 
-                for child in snapshot.children{
+                q.sync {
                     
-                    let snap = child as! DataSnapshot
-                    let dict = snap.value as? NSDictionary
-                    let date = dict!["timestamp"]
                     
-                    if date as! Double  == time {  // check if it already exists in the database
+                    for child in snapshot.children{
                         
-                        self.timestampExist = true
+                        let snap = child as! DataSnapshot
+                        let dict = snap.value as? NSDictionary
+                        let date = dict!["timestamp"]
+                        let x: Double = date as! Double
+                        if x   == time {  // check if it already exists in the database
+                            
+                            self.timestampExist = true
+                            
+                        } else {
+                            self.timestampExist = false
+                        }
                         
-                    } else {
-                        self.timestampExist = false
                     }
                     
                 }
-            }
-            
-            
-            if translateUnixTime(time: time) != self.checkDate && self.timestampExist == false {
-                self.checkDate = translateUnixTime(time: time)
-                print(max, maxLocation)
-                let ref = Database.database().reference().child("final").childByAutoId()
-                ref.setValue(final)
+                
+                if self.translateUnixTime(time: time) != self.checkDate && self.timestampExist == false {
+                    self.checkDate = self.translateUnixTime(time: time)
+                    print(max, maxLocation)
+                    let ref = Database.database().reference().child("final").childByAutoId()
+                    ref.setValue(final)
+                    
+                }
+                
                 
             }
+            
+            
+            
+            
+            
             
         }
     }
@@ -788,21 +794,34 @@ class ViewController: RangeViewController,  ESTNearableManagerDelegate, CBPeriph
         var date = Date()
         let date3 = Calendar.current.date(from: date2)!
         
-      //  print(date3)
-     
+        //  print(date3)
+        
         let timer = Timer(fireAt: date3, interval: 86400, target: self, selector: #selector(getData), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
         
         
     }
-
     
     
-
+    // CODE FOR GEO FENCES
+    
+    
+    func setupGeoFence() {
+        
+        
+    }
+    
+    
+    
+    
+    
+    // CODE FOR GEO FENCES
+    
+    
     
     
 }
- // Code for running results everyday at 2 PM
+// Code for running results everyday at 2 PM
 
 
 

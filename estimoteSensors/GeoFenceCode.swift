@@ -10,120 +10,76 @@ import UIKit
 import CoreLocation
 import MapKit
 import UserNotifications
+import FirebaseAuth
+import FirebaseDatabase
 
 
 class GeoFenceCode: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-     let locationManager = CLLocationManager()
-     let geofenceRegionCenter = CLLocationCoordinate2DMake(37.3308983, -121.89334919999999);
-      let center = UNUserNotificationCenter.current()
+    let locationManager = CLLocationManager()
+    
+    let center = UNUserNotificationCenter.current()
     let options: UNAuthorizationOptions = [.alert, .sound];
-
+    
+    
     
     @IBOutlet weak var labelOutlet: UILabel!
     
-    @IBOutlet weak var mapView: MKMapView!
+    
+  //  @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locationManager.requestAlwaysAuthorization()
         center.requestAuthorization(options: self.options) { (granted, error) in
-        
+            
         }
-        self.mapView.delegate = self
+      //  self.mapView.delegate = self
         self.locationManager.delegate = self
         
         self.locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters
         
-
-
+        
+        
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-       
-  
+        
+        
         self.locationManager.startUpdatingLocation()
-  
         
         
         
-          let date = NSDate(timeIntervalSince1970: 1515448224)
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
-        dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
-        dateFormatter.timeZone = NSTimeZone(name: "PST") as! TimeZone
-        let localDate = dateFormatter.string(from: date as Date)
-        print(localDate)
-        print("x")
-   
+        
+        
+        
     }
-
+    
     
     func setUpGeofence() {
         
-        let geofenceRegionCenter = CLLocationCoordinate2DMake(37.331099188, -121.89324);
-        let geofenceRegion = CLCircularRegion(center: geofenceRegionCenter, radius: 3, identifier: "ishansDESK")
-        geofenceRegion.notifyOnExit = true
-        geofenceRegion.notifyOnEntry = true
-   
-        locationManager.startMonitoring(for: geofenceRegion)
-        
-    
-        
-        let homeCenter = CLLocationCoordinate2DMake(37.5634, -122.0457)
-        let homeRegion = CLCircularRegion(center: homeCenter, radius: 3, identifier: "home")
-        
-        
-        
-//        homeRegion.notifyOnExit = true
-//        homeRegion.notifyOnEntry = true
-//
-//        locationManager.startMonitoring(for: homeRegion)
-
-        
-        
-        
-        
-        let otherSideCenter = CLLocationCoordinate2DMake(37.3305, -121.8935)
-        let otherSideRegion = CLCircularRegion(center: otherSideCenter, radius: 3, identifier: "otherside")
-        otherSideRegion.notifyOnEntry = true
-        otherSideRegion.notifyOnExit = true
-        
-        locationManager.startMonitoring(for: otherSideRegion)
         
         
         
         
         
         
+        let templatesCenter = CLLocationCoordinate2DMake(37.3305, -121.8946)
+        let templatesRegion = CLCircularRegion(center: templatesCenter, radius: 0.06, identifier: "templates")
+        templatesRegion.notifyOnEntry = true
+        templatesRegion.notifyOnExit = true
+        
+        locationManager.startMonitoring(for: templatesRegion)
         
         
         
-   
+     //   self.mapView.showsUserLocation = true;
         
         
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let mapRegion = MKCoordinateRegion(center: geofenceRegionCenter, span: span)
-        self.mapView.setRegion(mapRegion, animated: true)
-        let regionCircle = MKCircle(center: geofenceRegionCenter, radius: 3)
-        self.mapView.add(regionCircle)
-        self.mapView.showsUserLocation = true;
         
-       
-        let regionHome = MKCircle(center: homeCenter, radius: 15)
-        self.mapView.add(regionHome)
+        let templates = MKCircle(center: templatesCenter, radius: 0.01)
+     //   self.mapView.add(templates)
         
         
-        let other = MKCircle(center: otherSideCenter, radius: 3)
-        self.mapView.add(other)
-        
-        
-      //  let rRectangle = MKPolygon(
-        
-        
-
-        
-    
-
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -136,12 +92,13 @@ class GeoFenceCode: UIViewController, CLLocationManagerDelegate, MKMapViewDelega
     
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         print("Started Monitoring Region", region.identifier)
-    
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-         let lastLocation: CLLocation = locations[locations.count - 1]
-         print(lastLocation.altitude, "This is the current altitude")
+        
+        let lastLocation: CLLocation = locations[locations.count - 1]
+        print(lastLocation.altitude, "This is the current altitude")
         print(lastLocation.floor,"This is the current floor")
         print(lastLocation.horizontalAccuracy, "This is the horizontal accuracy")
         print(lastLocation.verticalAccuracy, "this is the vertical accuracy")
@@ -149,26 +106,45 @@ class GeoFenceCode: UIViewController, CLLocationManagerDelegate, MKMapViewDelega
         
         let notification = UNMutableNotificationContent()
         notification.title = "checking your location"
-      
+        
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false )
         let request = UNNotificationRequest(identifier: "notification1", content: notification, trigger: notificationTrigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
         
+        
+        let location: NSDictionary
+        location = [                                                // ->>>>>>>>>>>>>> Place inside the didEnterRegionfunction 
+            
+            //  "userID" :  "hIp8zCKqYjTCck13JFAeCYWwBIo2",
+            "altitude" :  lastLocation.altitude,
+            "lat" :  lastLocation.coordinate.latitude,
+            "long" : lastLocation.coordinate.longitude,
+            "timestamp"   : Date().timeIntervalSince1970
+            
+            
+        ]
+        
+        let ref4 = Database.database().reference().child("geofenceData").childByAutoId()
+        ref4.setValue(location)
+        
+        
+        
+        
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-
         
-            print(userLocation.coordinate, "this is the current coordinate of the user")
+        
+        print(userLocation.coordinate, "this is the current coordinate of the user")
         
     }
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-
         
-         self.locationManager.requestAlwaysAuthorization()
+        print(region.identifier)
+        self.locationManager.requestAlwaysAuthorization()
         print("Entered Region")
-        labelOutlet.text = "ENTERED"
+      //  labelOutlet.text = "ENTERED"
         
         
         let alert = UIAlertController(title: "", message: "Entered Region", preferredStyle: .alert)
@@ -182,24 +158,27 @@ class GeoFenceCode: UIViewController, CLLocationManagerDelegate, MKMapViewDelega
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false )
         let request = UNNotificationRequest(identifier: "notification2", content: notification, trigger: notificationTrigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-
+        
+        
+       
+        
     }
     
     
     
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
         if state ==  .inside {
-            labelOutlet.text = "INSIDE"
+            //  labelOutlet.text = "INSIDE"
         }
         
         if state == .outside {
             
-            labelOutlet.text = "OUTSIDE"
+  
         }
         
         if state == .unknown {
             
-            labelOutlet.text = "UNKOWN"
+    
         }
         
     }
@@ -222,13 +201,13 @@ class GeoFenceCode: UIViewController, CLLocationManagerDelegate, MKMapViewDelega
         let request = UNNotificationRequest(identifier: "notification3", content: notification, trigger: notificationTrigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
-  
+    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.authorizedAlways) {
             self.setUpGeofence()
             self.locationManager.allowsBackgroundLocationUpdates = true
-           
+            
         }
     }
     
@@ -241,11 +220,11 @@ class GeoFenceCode: UIViewController, CLLocationManagerDelegate, MKMapViewDelega
         return overlayRenderer
     }
     
-
     
-
-
-
+    
+    
+    
+    
 }
 
 

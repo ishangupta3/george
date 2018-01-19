@@ -11,11 +11,11 @@ import FirebaseAuth
 import CoreMotion
 
 
-class RangeViewController: UIViewController, EILIndoorLocationManagerDelegate{
+class RangeViewController: GeoFenceCode,  EILIndoorLocationManagerDelegate{
     
     
 
-    let locationManager = EILIndoorLocationManager()
+    let locationManagerEstimote = EILIndoorLocationManager()
     let motionManager = CMMotionManager() // motion
     var timer:  Timer!
     
@@ -36,7 +36,7 @@ class RangeViewController: UIViewController, EILIndoorLocationManagerDelegate{
         
         
         // 3. Set the location manager's delegate
-        self.locationManager.delegate = self
+        self.locationManagerEstimote.delegate = self
         
         
         
@@ -60,7 +60,7 @@ class RangeViewController: UIViewController, EILIndoorLocationManagerDelegate{
         fetchLocationRequest.sendRequest { (location, error) in
             if location != nil {
                 self.location = location!
-                self.locationManager.startPositionUpdates(for: self.location)
+                self.locationManagerEstimote.startPositionUpdates(for: self.location)
                 print(location?.beacons)
                 print(location?.area)
             } else {

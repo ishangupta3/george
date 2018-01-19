@@ -13,6 +13,7 @@
 		CE2046DD1F67B7F400F84E0C /* cafe-data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2046DC1F67B7F400F84E0C /* cafe-data.swift */; };
 		CE2A3F691F182F1600D89651 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */; };
 		CE2D6FA6201075BE00482EBD /* GeoFenceCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6FA5201075BE00482EBD /* GeoFenceCode.swift */; };
+		CE2D6FA820111BA200482EBD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D6FA720111BA200482EBD /* Protocols.swift */; };
 		CE4EB65E1F16C691000FF48B /* NearableInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB65D1F16C691000FF48B /* NearableInformation.swift */; };
 		CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055631EFDF17400F596DB /* AppDelegate.swift */; };
 		CE5055661EFDF17400F596DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5055651EFDF17400F596DB /* ViewController.swift */; };
@@ -67,6 +68,7 @@
 		CE2046DC1F67B7F400F84E0C /* cafe-data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "cafe-data.swift"; sourceTree = "<group>"; };
 		CE2A3F681F182F1600D89651 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE2D6FA5201075BE00482EBD /* GeoFenceCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoFenceCode.swift; sourceTree = "<group>"; };
+		CE2D6FA720111BA200482EBD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		CE4EB65D1F16C691000FF48B /* NearableInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearableInformation.swift; sourceTree = "<group>"; };
 		CE5055601EFDF17400F596DB /* estimoteSensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = estimoteSensors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5055631EFDF17400F596DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				CE531FE11F9FD690003ECE63 /* NotifStruct.swift */,
 				CEEA0E431F33189000D9954B /* ModelFunctions.swift */,
 				CE5055651EFDF17400F596DB /* ViewController.swift */,
+				CE2D6FA720111BA200482EBD /* Protocols.swift */,
 				CE65B2D71F27AFDB0076423D /* RangeViewController.swift */,
 				CE65B2D91F2814840076423D /* nearableData.swift */,
 				CE2D6FA5201075BE00482EBD /* GeoFenceCode.swift */,
@@ -520,6 +523,7 @@
 				CEF0CB281FDB411D00AA40FD /* PasswordReset.swift in Sources */,
 				CE5055641EFDF17400F596DB /* AppDelegate.swift in Sources */,
 				CE93901F1F6C499E0067A0C1 /* DatabaseParent.swift in Sources */,
+				CE2D6FA820111BA200482EBD /* Protocols.swift in Sources */,
 				CE0A7BBE1F183A6F00541727 /* LoginViewControllerEstimote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

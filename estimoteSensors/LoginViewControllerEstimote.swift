@@ -36,7 +36,7 @@ class LoginViewControllerEstimote: UIViewController {
     
                     self.performSegue(withIdentifier:"goToHome", sender: self )
     
-                }
+               } 
     
             }
     
